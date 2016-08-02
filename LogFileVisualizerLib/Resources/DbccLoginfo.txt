@@ -1,0 +1,43 @@
+set deadlock_priority low;
+
+declare @version varchar(50) = cast(serverproperty('ProductVersion') as varchar(50));
+declare @dotPosition int = charindex('.', @version);
+declare @majorVersion int = case when @dotPosition > 0 then cast(substring(@version, 1, @dotPosition - 1) as int) end;
+
+if object_id('tempdb.dbo.#loginfo') is not null
+	drop table #loginfo;
+create table #loginfo
+(
+	DummyColumn int
+);
+
+if @majorVersion >= 11 -- SQL Server 2012 or higher.
+begin
+	alter table #loginfo
+	add RecoveryUnitId int;
+end
+
+alter table #loginfo
+add
+	FileId int,
+	FileSize bigint,
+	StartOffset bigint,
+	FSeqNo int,
+	Status int,
+	Parity tinyint,
+	CreateLSN decimal(25,0);
+
+alter table #loginfo
+drop column DummyColumn;
+
+insert #loginfo
+exec ('dbcc loginfo');
+
+declare @currentLsnHex nvarchar(50);
+
+select top 1 @currentLsnHex = [Current LSN]
+from fn_dblog(@lastKnownLsn, null)
+order by [Current LSN] desc;
+
+select *, @@SERVERNAME ServerName, db_name() DatabaseName, sysdatetime() CaptureTime, @currentLsnHex CurrentLsnHex
+from #loginfo;

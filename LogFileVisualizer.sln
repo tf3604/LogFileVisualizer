@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogFileVisualizer", "LogFileVisualizer\LogFileVisualizer.csproj", "{2F0B539B-51E7-41CF-9655-7ACF41E75E17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogFileVisualizerLib", "LogFileVisualizerLib\LogFileVisualizerLib.csproj", "{FDC706DC-8AEC-4FB9-99DD-E298FFBF6CF8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogFileInfoCapture", "LogFileInfoCapture\LogFileInfoCapture.csproj", "{16FABD70-92E2-468F-9AC1-C9244A27C7C9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2F0B539B-51E7-41CF-9655-7ACF41E75E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F0B539B-51E7-41CF-9655-7ACF41E75E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F0B539B-51E7-41CF-9655-7ACF41E75E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F0B539B-51E7-41CF-9655-7ACF41E75E17}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDC706DC-8AEC-4FB9-99DD-E298FFBF6CF8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDC706DC-8AEC-4FB9-99DD-E298FFBF6CF8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDC706DC-8AEC-4FB9-99DD-E298FFBF6CF8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDC706DC-8AEC-4FB9-99DD-E298FFBF6CF8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16FABD70-92E2-468F-9AC1-C9244A27C7C9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16FABD70-92E2-468F-9AC1-C9244A27C7C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16FABD70-92E2-468F-9AC1-C9244A27C7C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16FABD70-92E2-468F-9AC1-C9244A27C7C9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 1
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer =
+		SccLocalPath0 = .
+	EndGlobalSection
+EndGlobal
