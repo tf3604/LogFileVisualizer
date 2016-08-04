@@ -40,7 +40,7 @@ namespace LogFileVisualizerLib
             string[] parts = decimalSeparated.Split(':');
             if (parts.Length != 3)
             {
-                throw new ArgumentException("Hex-separated LSN must contain exactly three parts separated by colons.", nameof(decimalSeparated));
+                throw new ArgumentException("Decimal-separated LSN must contain exactly three parts separated by colons.", nameof(decimalSeparated));
             }
 
             int[] integerParts = new int[3];
@@ -130,6 +130,16 @@ namespace LogFileVisualizerLib
 
             string hexSeparated = IntToHex(vlfNumber, 8) + ":" + IntToHex(logBlockNumber, 8) + ":" + IntToHex(logRecordNumber, 4);
             return hexSeparated;
+        }
+
+        public static string DecimalToHexadecimal(decimal lsnValue)
+        {
+            int vlfNumber = (int)(lsnValue / 1000000000000000m);
+            int logBlockNumber = (int)((lsnValue % 1000000000000000m) / 100000m);
+            int logRecordNumber = (int)(lsnValue % 100000m);
+
+            string hexadecimal = "0x" + IntToHex(vlfNumber, 8) + IntToHex(logBlockNumber, 8) + IntToHex(logRecordNumber, 4);
+            return hexadecimal;
         }
 
         public static string DecimalToDecimalSeparated(decimal lsnValue)

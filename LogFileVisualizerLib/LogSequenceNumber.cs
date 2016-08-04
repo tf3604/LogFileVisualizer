@@ -57,6 +57,9 @@ namespace LogFileVisualizerLib
                 case LsnStringType.HexidecimalSeparated:
                     return LsnConverter.DecimalToHexSeparated(_lsnValue);
 
+                case LsnStringType.Hexadecimal:
+                    return LsnConverter.DecimalToHexadecimal(_lsnValue);
+
                 default:
                     throw new ArgumentException("Unknown LsnStringType specified.", nameof(stringType));
             }
@@ -65,7 +68,8 @@ namespace LogFileVisualizerLib
         public enum LsnStringType
         {
             HexidecimalSeparated,
-            DecimalSeparated
+            DecimalSeparated,
+            Hexadecimal
         }
     }
 }
