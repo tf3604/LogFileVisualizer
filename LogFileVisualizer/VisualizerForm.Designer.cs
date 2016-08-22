@@ -34,6 +34,7 @@
             this.primaryToolStrip = new System.Windows.Forms.ToolStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.liveViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -51,6 +52,8 @@
             // 
             // fileMenu
             // 
+            this.fileMenu.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.liveViewMenuItem});
             this.fileMenu.Name = "fileMenu";
             this.fileMenu.Size = new System.Drawing.Size(37, 20);
             this.fileMenu.Text = "&File";
@@ -87,6 +90,12 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // liveViewMenuItem
+            // 
+            this.liveViewMenuItem.Name = "liveViewMenuItem";
+            this.liveViewMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.liveViewMenuItem.Text = "&Live View";
+            // 
             // VisualizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -116,6 +125,7 @@
         private System.Windows.Forms.ToolStrip primaryToolStrip;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.ToolStripMenuItem liveViewMenuItem;
     }
 }
 

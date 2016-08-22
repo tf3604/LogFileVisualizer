@@ -61,7 +61,9 @@ namespace LogFileVisualizerLib {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to declare @version varchar(50) = cast(serverproperty(&apos;ProductVersion&apos;) as varchar(50));
+        ///   Looks up a localized string similar to set deadlock_priority low;
+        ///
+        ///declare @version varchar(50) = cast(serverproperty(&apos;ProductVersion&apos;) as varchar(50));
         ///declare @dotPosition int = charindex(&apos;.&apos;, @version);
         ///declare @majorVersion int = case when @dotPosition &gt; 0 then cast(substring(@version, 1, @dotPosition - 1) as int) end;
         ///
@@ -75,14 +77,36 @@ namespace LogFileVisualizerLib {
         ///if @majorVersion &gt;= 11 -- SQL Server 2012 or higher.
         ///begin
         ///	alter table #loginfo
-        ///	add RecoveryUnitId int;
-        ///end
-        ///
-        ///alter tabl [rest of string was truncated]&quot;;.
+        ///	add Recovery [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string DbccLoginfo {
             get {
                 return ResourceManager.GetString("DbccLoginfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to set deadlock_priority low;
+        ///
+        ///declare @version varchar(50) = cast(serverproperty(&apos;ProductVersion&apos;) as varchar(50));
+        ///declare @dotPosition int = charindex(&apos;.&apos;, @version);
+        ///declare @majorVersion int = case when @dotPosition &gt; 0 then cast(substring(@version, 1, @dotPosition - 1) as int) end;
+        ///
+        ///if object_id(&apos;tempdb.dbo.#loginfo&apos;) is not null
+        ///	drop table #loginfo;
+        ///create table #loginfo
+        ///(
+        ///	DummyColumn int
+        ///);
+        ///
+        ///if @majorVersion &gt;= 11 -- SQL Server 2012 or higher.
+        ///begin
+        ///	alter table #loginfo
+        ///	add Recovery [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string DbccLoginfoLite {
+            get {
+                return ResourceManager.GetString("DbccLoginfoLite", resourceCulture);
             }
         }
     }
