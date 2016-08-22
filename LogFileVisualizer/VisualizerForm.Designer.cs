@@ -95,6 +95,7 @@
             this.liveViewMenuItem.Name = "liveViewMenuItem";
             this.liveViewMenuItem.Size = new System.Drawing.Size(152, 22);
             this.liveViewMenuItem.Text = "&Live View";
+            this.liveViewMenuItem.Click += new System.EventHandler(this.LiveViewMenuItem_Click);
             // 
             // VisualizerForm
             // 

@@ -34,6 +34,8 @@ namespace LogFileVisualizer
         private const string _sqlAuth = "SQL Server Authentication";
 
         private ApplicationSqlConnection _connection = null;
+        private string _databaseName = null;
+        private bool _isPopulatingDatabaseDropdown = false;
 
         public ConnectSqlForm()
         {
@@ -45,6 +47,14 @@ namespace LogFileVisualizer
             get
             {
                 return _connection;
+            }
+        }
+
+        public string DatabaseName
+        {
+            get
+            {
+                return _databaseName;
             }
         }
 
@@ -62,6 +72,12 @@ namespace LogFileVisualizer
                 sb.IntegratedSecurity = false;
                 sb.UserID = this.userNameComboBox.Text;
                 sb.Password = this.passwordTextBox.Text;
+            }
+
+            if (_isPopulatingDatabaseDropdown == false &&
+                string.IsNullOrEmpty(databaseComboBox.Text) == false)
+            {
+                sb.InitialCatalog = databaseComboBox.Text;
             }
 
             SqlConnection sqlConnection = null;
@@ -145,6 +161,54 @@ namespace LogFileVisualizer
             VisualizerSettings.Instance.AddMostRecentSqlServer(serverNameComboBox.Text);
             VisualizerSettings.Instance.Save();
             this.DialogResult = DialogResult.OK;
+        }
+
+        private void DatabaseComboBox_DropDown(object sender, EventArgs e)
+        {
+            try
+            {
+                List<string> databaseNames = new List<string>();
+                _isPopulatingDatabaseDropdown = true;
+
+                using (ApplicationSqlConnection connection = AcquireConnection())
+                {
+                    using (Dal dal = new Dal(connection))
+                    {
+                        string sql = @"select name from sys.databases;";
+                        using (DataTable databaseNameTable = dal.ExecuteQueryOneResultSet(sql))
+                        {
+                            foreach (DataRow row in databaseNameTable.Rows)
+                            {
+                                databaseNames.Add(row["name"] as string);
+                            }
+                        }
+                    }
+                }
+
+                string previousDatabaseName = _databaseName;
+                databaseNames.Sort();
+                this.databaseComboBox.Items.Clear();
+                this.databaseComboBox.Items.AddRange(databaseNames.ToArray());
+
+                if (string.IsNullOrEmpty(previousDatabaseName) == false &&
+                    databaseNames.Contains(previousDatabaseName))
+                {
+                    databaseComboBox.Text = previousDatabaseName;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message);
+            }
+            finally
+            {
+                _isPopulatingDatabaseDropdown = false;
+            }
+        }
+
+        private void DatabaseComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _databaseName = databaseComboBox.Text;
         }
     }
 }

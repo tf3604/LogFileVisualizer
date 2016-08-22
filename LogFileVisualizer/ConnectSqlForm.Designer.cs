@@ -56,12 +56,14 @@ namespace LogFileVisualizer
             this.appNameLabel = new System.Windows.Forms.Label();
             this.connectButton = new System.Windows.Forms.Button();
             this.cancelButton = new System.Windows.Forms.Button();
+            this.databaseComboBox = new System.Windows.Forms.ComboBox();
+            this.databaseLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // serverNameLabel
             // 
             this.serverNameLabel.AutoSize = true;
-            this.serverNameLabel.Location = new System.Drawing.Point(12, 77);
+            this.serverNameLabel.Location = new System.Drawing.Point(12, 65);
             this.serverNameLabel.Name = "serverNameLabel";
             this.serverNameLabel.Size = new System.Drawing.Size(70, 13);
             this.serverNameLabel.TabIndex = 0;
@@ -70,7 +72,7 @@ namespace LogFileVisualizer
             // serverNameComboBox
             // 
             this.serverNameComboBox.FormattingEnabled = true;
-            this.serverNameComboBox.Location = new System.Drawing.Point(151, 73);
+            this.serverNameComboBox.Location = new System.Drawing.Point(151, 61);
             this.serverNameComboBox.Name = "serverNameComboBox";
             this.serverNameComboBox.Size = new System.Drawing.Size(244, 21);
             this.serverNameComboBox.TabIndex = 1;
@@ -78,7 +80,7 @@ namespace LogFileVisualizer
             // authenticationLabel
             // 
             this.authenticationLabel.AutoSize = true;
-            this.authenticationLabel.Location = new System.Drawing.Point(12, 104);
+            this.authenticationLabel.Location = new System.Drawing.Point(12, 92);
             this.authenticationLabel.Name = "authenticationLabel";
             this.authenticationLabel.Size = new System.Drawing.Size(78, 13);
             this.authenticationLabel.TabIndex = 2;
@@ -88,7 +90,7 @@ namespace LogFileVisualizer
             // 
             this.authenticationComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.authenticationComboBox.FormattingEnabled = true;
-            this.authenticationComboBox.Location = new System.Drawing.Point(151, 100);
+            this.authenticationComboBox.Location = new System.Drawing.Point(151, 88);
             this.authenticationComboBox.Name = "authenticationComboBox";
             this.authenticationComboBox.Size = new System.Drawing.Size(244, 21);
             this.authenticationComboBox.TabIndex = 3;
@@ -98,7 +100,7 @@ namespace LogFileVisualizer
             // 
             this.userNameLabel.AutoSize = true;
             this.userNameLabel.Enabled = false;
-            this.userNameLabel.Location = new System.Drawing.Point(32, 131);
+            this.userNameLabel.Location = new System.Drawing.Point(32, 119);
             this.userNameLabel.Name = "userNameLabel";
             this.userNameLabel.Size = new System.Drawing.Size(61, 13);
             this.userNameLabel.TabIndex = 4;
@@ -108,7 +110,7 @@ namespace LogFileVisualizer
             // 
             this.userNameComboBox.Enabled = false;
             this.userNameComboBox.FormattingEnabled = true;
-            this.userNameComboBox.Location = new System.Drawing.Point(171, 127);
+            this.userNameComboBox.Location = new System.Drawing.Point(171, 115);
             this.userNameComboBox.Name = "userNameComboBox";
             this.userNameComboBox.Size = new System.Drawing.Size(224, 21);
             this.userNameComboBox.TabIndex = 5;
@@ -117,7 +119,7 @@ namespace LogFileVisualizer
             // 
             this.passwordLabel.AutoSize = true;
             this.passwordLabel.Enabled = false;
-            this.passwordLabel.Location = new System.Drawing.Point(32, 157);
+            this.passwordLabel.Location = new System.Drawing.Point(32, 145);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(56, 13);
             this.passwordLabel.TabIndex = 6;
@@ -126,7 +128,7 @@ namespace LogFileVisualizer
             // passwordTextBox
             // 
             this.passwordTextBox.Enabled = false;
-            this.passwordTextBox.Location = new System.Drawing.Point(171, 153);
+            this.passwordTextBox.Location = new System.Drawing.Point(171, 141);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
             this.passwordTextBox.Size = new System.Drawing.Size(224, 20);
@@ -136,7 +138,7 @@ namespace LogFileVisualizer
             // 
             this.rememberPwdCheckBox.AutoSize = true;
             this.rememberPwdCheckBox.Enabled = false;
-            this.rememberPwdCheckBox.Location = new System.Drawing.Point(171, 179);
+            this.rememberPwdCheckBox.Location = new System.Drawing.Point(171, 167);
             this.rememberPwdCheckBox.Name = "rememberPwdCheckBox";
             this.rememberPwdCheckBox.Size = new System.Drawing.Size(125, 17);
             this.rememberPwdCheckBox.TabIndex = 8;
@@ -174,6 +176,26 @@ namespace LogFileVisualizer
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
             // 
+            // databaseComboBox
+            // 
+            this.databaseComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.databaseComboBox.FormattingEnabled = true;
+            this.databaseComboBox.Location = new System.Drawing.Point(151, 191);
+            this.databaseComboBox.Name = "databaseComboBox";
+            this.databaseComboBox.Size = new System.Drawing.Size(244, 21);
+            this.databaseComboBox.TabIndex = 13;
+            this.databaseComboBox.DropDown += new System.EventHandler(this.DatabaseComboBox_DropDown);
+            this.databaseComboBox.SelectedIndexChanged += new System.EventHandler(this.DatabaseComboBox_SelectedIndexChanged);
+            // 
+            // databaseLabel
+            // 
+            this.databaseLabel.AutoSize = true;
+            this.databaseLabel.Location = new System.Drawing.Point(12, 195);
+            this.databaseLabel.Name = "databaseLabel";
+            this.databaseLabel.Size = new System.Drawing.Size(87, 13);
+            this.databaseLabel.TabIndex = 12;
+            this.databaseLabel.Text = "&Database Name:";
+            // 
             // ConnectSqlForm
             // 
             this.AcceptButton = this.connectButton;
@@ -181,6 +203,8 @@ namespace LogFileVisualizer
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.cancelButton;
             this.ClientSize = new System.Drawing.Size(407, 280);
+            this.Controls.Add(this.databaseComboBox);
+            this.Controls.Add(this.databaseLabel);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.connectButton);
             this.Controls.Add(this.appNameLabel);
@@ -218,5 +242,7 @@ namespace LogFileVisualizer
         private System.Windows.Forms.Label appNameLabel;
         private System.Windows.Forms.Button connectButton;
         private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.ComboBox databaseComboBox;
+        private System.Windows.Forms.Label databaseLabel;
     }
 }
