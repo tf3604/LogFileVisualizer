@@ -32,6 +32,58 @@ namespace LogFileVisualizerLib
             }
         }
 
+        public string InstanceName
+        {
+            get
+            {
+                if (_connection == null)
+                {
+                    return string.Empty;
+                }
+                SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder(_connection.ConnectionString);
+                return sb.DataSource;
+            }
+        }
+
+        public string DatabaseName
+        {
+            get
+            {
+                if (_connection == null)
+                {
+                    return string.Empty;
+                }
+                SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder(_connection.ConnectionString);
+                return sb.InitialCatalog;
+            }
+        }
+
+        public bool IsSqlAuthentication
+        {
+            get
+            {
+                if (_connection == null)
+                {
+                    return false;
+                }
+                SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder(_connection.ConnectionString);
+                return sb.IntegratedSecurity == false;
+            }
+        }
+
+        public string UserName
+        {
+            get
+            {
+                if (_connection == null)
+                {
+                    return string.Empty;
+                }
+                SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder(_connection.ConnectionString);
+                return sb.UserID;
+            }
+        }
+
         public bool IsAvailable
         {
             get

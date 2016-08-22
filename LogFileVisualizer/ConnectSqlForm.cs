@@ -50,14 +50,6 @@ namespace LogFileVisualizer
             }
         }
 
-        public string DatabaseName
-        {
-            get
-            {
-                return _databaseName;
-            }
-        }
-
         private ApplicationSqlConnection AcquireConnection()
         {
             SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder();

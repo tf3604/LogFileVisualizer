@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace LogFileVisualizerLib
 {
-    class DbccLogInfoItem
+    public class DbccLogInfoItem
     {
         public int RecoveryUnitId
         {

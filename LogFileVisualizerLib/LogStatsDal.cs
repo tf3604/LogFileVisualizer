@@ -8,19 +8,36 @@ using System.Threading.Tasks;
 
 namespace LogFileVisualizerLib
 {
-    internal class LogStatsDal : DalBase
+    public class LogStatsDal : DalBase
     {
         public LogStatsDal(string instanceName, string databaseName)
             : base (instanceName, databaseName)
         {
         }
 
-        public List<DbccLogInfoItem> ReadDbccLogInfo(LogSequenceNumber lastKnownLsn)
+        public LogStatsDal(ApplicationSqlConnection connection)
+            : base(connection)
         {
-            string sql = LogFileVisualizerResources.DbccLoginfo;
-            SqlParameter lsnParameter = new SqlParameter("lastKnownLsn", GetParameterValue(lastKnownLsn?.ToString(LogSequenceNumber.LsnStringType.DecimalSeparated)));
+        }
 
-            using (DataTable table = ExecuteSqlOneResultset(sql, lsnParameter))
+        public List<DbccLogInfoItem> ReadDbccLogInfo(LogSequenceNumber lastKnownLsn, bool useLiteVersion = false)
+        {
+            string sql;
+            SqlParameter[] parameters;
+
+            if (useLiteVersion)
+            {
+                sql = LogFileVisualizerResources.DbccLoginfoLite;
+                parameters = null;
+            }
+            else
+            {
+                sql = LogFileVisualizerResources.DbccLoginfo;
+                SqlParameter lsnParameter = new SqlParameter("lastKnownLsn", GetParameterValue(lastKnownLsn?.ToString(LogSequenceNumber.LsnStringType.DecimalSeparated)));
+                parameters = new SqlParameter[1] { lsnParameter };
+            }
+
+            using (DataTable table = ExecuteSqlOneResultset(sql, parameters))
             {
                 List<DbccLogInfoItem> list = new List<DbccLogInfoItem>();
 

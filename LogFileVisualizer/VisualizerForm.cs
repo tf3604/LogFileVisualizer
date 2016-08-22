@@ -14,6 +14,8 @@ namespace LogFileVisualizer
     public partial class VisualizerForm : Form
     {
         private ApplicationSqlConnection _connection = null;
+        private LiveViewOptions _liveViewOptions = null;
+        private DisplayMode _displayMode = DisplayMode.NotSet;
 
         public VisualizerForm()
         {
@@ -22,13 +24,29 @@ namespace LogFileVisualizer
 
         private void LiveViewMenuItem_Click(object sender, EventArgs e)
         {
-            using (ConnectSqlForm form = new ConnectSqlForm())
+            using (LiveViewOptionsForm form = new LiveViewOptionsForm(_liveViewOptions?.Connection ?? _connection))
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _connection = form.Connection;
+                    _liveViewOptions = form.Options;
+                    _liveViewOptions.DisplaySurface = displayPictureBox;
+                    _displayMode = DisplayMode.LiveView;
+
+                    InitializeDisplay();
                 }
             }
+        }
+
+        private void InitializeDisplay()
+        {
+        }
+
+        private enum DisplayMode
+        {
+            NotSet,
+            LiveView,
+            ReplayFromTable,
+            ReplayFromFile
         }
     }
 }

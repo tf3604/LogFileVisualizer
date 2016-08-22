@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LogFileVisualizerLib
 {
-    internal abstract class DalBase : IDisposable
+    public abstract class DalBase : IDisposable
     {
         protected SqlConnection _connection;
 
@@ -31,6 +31,21 @@ namespace LogFileVisualizerLib
 
             _connection = new SqlConnection(sb.ToString());
             _connection.Open();
+        }
+
+        public DalBase(ApplicationSqlConnection connection)
+        {
+            if (connection == null)
+            {
+                throw new ArgumentNullException(nameof(connection));
+            }
+
+            if (connection.Connection == null)
+            {
+                throw new ArgumentException("Connection property cannot be null.", nameof(connection));
+            }
+
+            _connection = connection.Connection;
         }
 
         public void Dispose()

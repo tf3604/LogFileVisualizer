@@ -57,6 +57,15 @@
     <Compile Include="ConnectSqlForm.designer.cs">
       <DependentUpon>ConnectSqlForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="LiveViewOptions.cs" />
+    <Compile Include="LiveViewOptionsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="LiveViewOptionsForm.Designer.cs">
+      <DependentUpon>LiveViewOptionsForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="LiveViewVisualizer.cs" />
+    <Compile Include="LogRenderer.cs" />
     <Compile Include="VisualizerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +77,9 @@
     <Compile Include="VizualizerSettings.cs" />
     <EmbeddedResource Include="ConnectSqlForm.resx">
       <DependentUpon>ConnectSqlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LiveViewOptionsForm.resx">
+      <DependentUpon>LiveViewOptionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VisualizerForm.resx">
       <DependentUpon>VisualizerForm.cs</DependentUpon>

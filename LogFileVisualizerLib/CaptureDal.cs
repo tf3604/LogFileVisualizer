@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace LogFileVisualizerLib
 {
-    internal class CaptureDal : DalBase
+    public class CaptureDal : DalBase
     {
         private Dictionary<string, int> _captureSystemCache = new Dictionary<string, int>();
         private Dictionary<string, int> _captureDatabaseCache = new Dictionary<string, int>();
