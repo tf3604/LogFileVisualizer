@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisualizerForm));
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.liveViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,7 +36,9 @@
             this.primaryToolStrip = new System.Windows.Forms.ToolStrip();
             this.panel1 = new System.Windows.Forms.Panel();
             this.displayPictureBox = new System.Windows.Forms.PictureBox();
+            this.stopButton = new System.Windows.Forms.ToolStripButton();
             this.mainMenu.SuspendLayout();
+            this.primaryToolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.displayPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -75,6 +78,8 @@
             // 
             // primaryToolStrip
             // 
+            this.primaryToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.stopButton});
             this.primaryToolStrip.Location = new System.Drawing.Point(0, 24);
             this.primaryToolStrip.Name = "primaryToolStrip";
             this.primaryToolStrip.Size = new System.Drawing.Size(787, 25);
@@ -97,6 +102,17 @@
             this.displayPictureBox.TabIndex = 0;
             this.displayPictureBox.TabStop = false;
             // 
+            // stopButton
+            // 
+            this.stopButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.stopButton.Enabled = false;
+            this.stopButton.Image = ((System.Drawing.Image)(resources.GetObject("stopButton.Image")));
+            this.stopButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(35, 22);
+            this.stopButton.Text = "Stop";
+            this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
+            // 
             // VisualizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -111,6 +127,8 @@
             this.Text = "SQL Server Log File Visualizer";
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
+            this.primaryToolStrip.ResumeLayout(false);
+            this.primaryToolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.displayPictureBox)).EndInit();
             this.ResumeLayout(false);
@@ -127,6 +145,7 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.PictureBox displayPictureBox;
         private System.Windows.Forms.ToolStripMenuItem liveViewMenuItem;
+        private System.Windows.Forms.ToolStripButton stopButton;
     }
 }
 

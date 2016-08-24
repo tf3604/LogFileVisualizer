@@ -17,6 +17,8 @@ namespace LogFileVisualizer
         private LiveViewOptions _liveViewOptions = null;
         private DisplayMode _displayMode = DisplayMode.NotSet;
 
+        private LiveViewVisualizer _liveViewVisualizer = null;
+
         public VisualizerForm()
         {
             InitializeComponent();
@@ -39,6 +41,7 @@ namespace LogFileVisualizer
 
         private void InitializeDisplay()
         {
+            stopButton.Enabled = true;
         }
 
         private enum DisplayMode
@@ -47,6 +50,15 @@ namespace LogFileVisualizer
             LiveView,
             ReplayFromTable,
             ReplayFromFile
+        }
+
+        private void StopButton_Click(object sender, EventArgs e)
+        {
+            if (_liveViewVisualizer != null)
+            {
+                _liveViewVisualizer.Cancel();
+                // TODO: What to do with the _liveViewVisualizer object?  Dispose immediately?
+            }
         }
     }
 }
