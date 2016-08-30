@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -122,6 +123,31 @@ namespace LogFileVisualizerLib
             return decimalValue;
         }
 
+        public static decimal HexadecimalToDecimal(string hexadecimal)
+        {
+            if (string.IsNullOrEmpty(hexadecimal))
+            {
+                throw new ArgumentNullException(nameof(hexadecimal));
+            }
+
+            hexadecimal = hexadecimal.ToLowerInvariant();
+
+            if (hexadecimal.StartsWith("0x") == false)
+            {
+                throw new ArgumentException("Hexadecimal LSN must start with '0x'.", nameof(hexadecimal));
+            }
+
+            hexadecimal = hexadecimal.Substring(2);
+
+            decimal decimalValue;
+            if (decimal.TryParse(hexadecimal, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out decimalValue) == false)
+            {
+                throw new ArgumentException("Unable to convert value from hexadecimal: " + hexadecimal);
+            }
+
+            return decimalValue;
+        }
+
         public static string DecimalToHexSeparated(decimal lsnValue)
         {
             int vlfNumber = (int)(lsnValue / 1000000000000000m);
@@ -168,7 +194,7 @@ namespace LogFileVisualizerLib
 
         private static int HexToInt(string hex)
         {
-            return int.Parse(hex, System.Globalization.NumberStyles.HexNumber);
+            return int.Parse(hex, NumberStyles.HexNumber);
         }
 
         private static string IntToHex(int value, int nbrCharacters)

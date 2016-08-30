@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogFileVisualizerLib", "Log
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogFileInfoCapture", "LogFileInfoCapture\LogFileInfoCapture.csproj", "{16FABD70-92E2-468F-9AC1-C9244A27C7C9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LsnConverter", "LsnConverter\LsnConverter.csproj", "{FEBFEC63-F1CD-4392-A9A6-F24153C52298}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,14 +29,12 @@ Global
 		{16FABD70-92E2-468F-9AC1-C9244A27C7C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16FABD70-92E2-468F-9AC1-C9244A27C7C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16FABD70-92E2-468F-9AC1-C9244A27C7C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEBFEC63-F1CD-4392-A9A6-F24153C52298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEBFEC63-F1CD-4392-A9A6-F24153C52298}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEBFEC63-F1CD-4392-A9A6-F24153C52298}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEBFEC63-F1CD-4392-A9A6-F24153C52298}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 1
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer =
-		SccLocalPath0 = .
 	EndGlobalSection
 EndGlobal

@@ -32,6 +32,14 @@ namespace LogFileVisualizerLib
                     _lsnValue = LsnConverter.HexSeparatedToDecimal(lsnValue);
                     break;
 
+                case LsnStringType.Hexadecimal:
+                    _lsnValue = LsnConverter.HexadecimalToDecimal(lsnValue);
+                    break;
+
+                case LsnStringType.Decimal:
+                    _lsnValue = decimal.Parse(lsnValue);
+                    break;
+
                 default:
                     throw new ArgumentException("Unknown LsnStringType specified.", nameof(stringType));
             }
@@ -60,6 +68,9 @@ namespace LogFileVisualizerLib
                 case LsnStringType.Hexadecimal:
                     return LsnConverter.DecimalToHexadecimal(_lsnValue);
 
+                case LsnStringType.Decimal:
+                    return _lsnValue.ToString();
+
                 default:
                     throw new ArgumentException("Unknown LsnStringType specified.", nameof(stringType));
             }
@@ -69,7 +80,8 @@ namespace LogFileVisualizerLib
         {
             HexidecimalSeparated,
             DecimalSeparated,
-            Hexadecimal
+            Hexadecimal,
+            Decimal
         }
     }
 }
