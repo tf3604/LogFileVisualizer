@@ -62,7 +62,11 @@ namespace LogFileVisualizerLib
                     item.ServerName = GetObjectValue<string>(row, "ServerName");
                     item.DatabaseName = GetObjectValue<string>(row, "DatabaseName");
                     item.CaptureTime = GetObjectValue<DateTime>(row, "CaptureTime");
-                    item.LastKnownLsn = new LogSequenceNumber(GetObjectValue<string>(row, "CurrentLsnHex"), LogSequenceNumber.LsnStringType.HexidecimalSeparated);
+
+                    if (useLiteVersion == false)
+                    {
+                        item.LastKnownLsn = new LogSequenceNumber(GetObjectValue<string>(row, "CurrentLsnHex"), LogSequenceNumber.LsnStringType.HexidecimalSeparated);
+                    }
 
                     list.Add(item);
                 }

@@ -33,7 +33,7 @@ namespace LogFileVisualizer
 
             do
             {
-                LogRenderer.Render(_dal, _options.DisplaySurface);
+                LogRenderer.Render(_dal, _options);
                 startTime = DateTime.Now;
                 nextRefreshTime = startTime.AddSeconds(_options.RefreshIntervalSeconds);
                 do

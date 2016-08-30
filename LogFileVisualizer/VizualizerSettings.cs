@@ -112,6 +112,13 @@ namespace LogFileVisualizer
             set;
         }
 
+        [DataMember]
+        public LiveViewOptions LiveViewOptions
+        {
+            get;
+            set;
+        }
+
         public void Save()
         {
             if (_userSettingsOverwriteDecline == true)

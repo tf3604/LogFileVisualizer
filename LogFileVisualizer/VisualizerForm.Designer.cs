@@ -34,9 +34,9 @@
             this.liveViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.primaryToolStrip = new System.Windows.Forms.ToolStrip();
+            this.stopButton = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.displayPictureBox = new System.Windows.Forms.PictureBox();
-            this.stopButton = new System.Windows.Forms.ToolStripButton();
             this.mainMenu.SuspendLayout();
             this.primaryToolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -86,22 +86,6 @@
             this.primaryToolStrip.TabIndex = 2;
             this.primaryToolStrip.Text = "toolStrip1";
             // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.displayPictureBox);
-            this.panel1.Location = new System.Drawing.Point(0, 53);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(787, 358);
-            this.panel1.TabIndex = 3;
-            // 
-            // displayPictureBox
-            // 
-            this.displayPictureBox.Location = new System.Drawing.Point(0, 0);
-            this.displayPictureBox.Name = "displayPictureBox";
-            this.displayPictureBox.Size = new System.Drawing.Size(787, 358);
-            this.displayPictureBox.TabIndex = 0;
-            this.displayPictureBox.TabStop = false;
-            // 
             // stopButton
             // 
             this.stopButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
@@ -112,6 +96,28 @@
             this.stopButton.Size = new System.Drawing.Size(35, 22);
             this.stopButton.Text = "Stop";
             this.stopButton.Click += new System.EventHandler(this.StopButton_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel1.Controls.Add(this.displayPictureBox);
+            this.panel1.Location = new System.Drawing.Point(0, 53);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(787, 358);
+            this.panel1.TabIndex = 3;
+            // 
+            // displayPictureBox
+            // 
+            this.displayPictureBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.displayPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.displayPictureBox.Name = "displayPictureBox";
+            this.displayPictureBox.Size = new System.Drawing.Size(787, 358);
+            this.displayPictureBox.TabIndex = 0;
+            this.displayPictureBox.TabStop = false;
             // 
             // VisualizerForm
             // 

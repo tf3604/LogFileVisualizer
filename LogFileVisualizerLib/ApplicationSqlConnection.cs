@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace LogFileVisualizerLib
 {
+    [DataContract]
     public class ApplicationSqlConnection : IDisposable
     {
         private SqlConnection _connection;        
@@ -24,6 +26,40 @@ namespace LogFileVisualizerLib
             _connection.InfoMessage += InfoMessageInternal;
         }
 
+        public ApplicationSqlConnection(string connectionString)
+        {
+            if (connectionString == null)
+            {
+                throw new ArgumentNullException(nameof(connectionString));
+            }
+
+            _connection = new SqlConnection(connectionString);
+            _connection.Open();
+            _connection.InfoMessage += InfoMessageInternal;
+        }
+
+        public ApplicationSqlConnection(string instanceName, string databaseName)
+        {
+            if (string.IsNullOrEmpty(instanceName))
+            {
+                throw new ArgumentNullException(nameof(instanceName));
+            }
+
+            if (string.IsNullOrEmpty(databaseName))
+            {
+                throw new ArgumentNullException(nameof(databaseName));
+            }
+
+            SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder();
+            sb.DataSource = instanceName;
+            sb.InitialCatalog = databaseName;
+            sb.IntegratedSecurity = true;
+
+            _connection = new SqlConnection(sb.ToString());
+            _connection.Open();
+            _connection.InfoMessage += InfoMessageInternal;
+        }
+
         public SqlConnection Connection
         {
             get
@@ -32,6 +68,16 @@ namespace LogFileVisualizerLib
             }
         }
 
+        [DataMember]
+        private string ConnectionString
+        {
+            get
+            {
+                return _connection?.ConnectionString;
+            }
+        }
+
+        [DataMember]
         public string InstanceName
         {
             get
@@ -45,6 +91,7 @@ namespace LogFileVisualizerLib
             }
         }
 
+        [DataMember]
         public string DatabaseName
         {
             get
@@ -58,6 +105,7 @@ namespace LogFileVisualizerLib
             }
         }
 
+        [DataMember]
         public bool IsSqlAuthentication
         {
             get
@@ -71,6 +119,7 @@ namespace LogFileVisualizerLib
             }
         }
 
+        [DataMember]
         public string UserName
         {
             get

@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using LogFileVisualizerLib;
@@ -14,7 +15,6 @@ namespace LogFileVisualizer
     public partial class VisualizerForm : Form
     {
         private ApplicationSqlConnection _connection = null;
-        private LiveViewOptions _liveViewOptions = null;
         private DisplayMode _displayMode = DisplayMode.NotSet;
 
         private LiveViewVisualizer _liveViewVisualizer = null;
@@ -26,15 +26,20 @@ namespace LogFileVisualizer
 
         private void LiveViewMenuItem_Click(object sender, EventArgs e)
         {
-            using (LiveViewOptionsForm form = new LiveViewOptionsForm(_liveViewOptions?.Connection ?? _connection))
+            using (LiveViewOptionsForm form = new LiveViewOptionsForm(_connection))
             {
                 if (form.ShowDialog() == DialogResult.OK)
                 {
-                    _liveViewOptions = form.Options;
-                    _liveViewOptions.DisplaySurface = displayPictureBox;
+                    VisualizerSettings.Instance.LiveViewOptions.DisplaySurface = displayPictureBox;
                     _displayMode = DisplayMode.LiveView;
 
                     InitializeDisplay();
+
+                    _liveViewVisualizer = new LiveViewVisualizer(VisualizerSettings.Instance.LiveViewOptions);
+
+                    Thread liveViewThread = new Thread(_liveViewVisualizer.Start);
+                    liveViewThread.IsBackground = true;
+                    liveViewThread.Start();
                 }
             }
         }
@@ -57,8 +62,9 @@ namespace LogFileVisualizer
             if (_liveViewVisualizer != null)
             {
                 _liveViewVisualizer.Cancel();
-                // TODO: What to do with the _liveViewVisualizer object?  Dispose immediately?
             }
+
+            stopButton.Enabled = false;
         }
     }
 }

@@ -34,8 +34,15 @@
             this.databaseTextBox = new System.Windows.Forms.TextBox();
             this.changeConnectionButton = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.refreshIntervalSeconds = new System.Windows.Forms.NumericUpDown();
+            this.startButton = new System.Windows.Forms.Button();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.layoutTypeGroupBox = new System.Windows.Forms.GroupBox();
+            this.physicalLayoutRadioButton = new System.Windows.Forms.RadioButton();
+            this.logicalLayoutRadioButton = new System.Windows.Forms.RadioButton();
+            this.showVlfNumberCheckBox = new System.Windows.Forms.CheckBox();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshIntervalSeconds)).BeginInit();
+            this.layoutTypeGroupBox.SuspendLayout();
             this.SuspendLayout();
             // 
             // connectToLabel
@@ -95,34 +102,121 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Refresh interval (seconds):";
             // 
-            // numericUpDown1
+            // refreshIntervalSeconds
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(190, 122);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(61, 20);
-            this.numericUpDown1.TabIndex = 6;
-            this.numericUpDown1.Value = new decimal(new int[] {
+            this.refreshIntervalSeconds.Location = new System.Drawing.Point(190, 122);
+            this.refreshIntervalSeconds.Maximum = new decimal(new int[] {
+            3600,
+            0,
+            0,
+            0});
+            this.refreshIntervalSeconds.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.refreshIntervalSeconds.Name = "refreshIntervalSeconds";
+            this.refreshIntervalSeconds.Size = new System.Drawing.Size(61, 20);
+            this.refreshIntervalSeconds.TabIndex = 6;
+            this.refreshIntervalSeconds.Value = new decimal(new int[] {
             60,
             0,
             0,
             0});
             // 
+            // startButton
+            // 
+            this.startButton.Location = new System.Drawing.Point(22, 259);
+            this.startButton.Name = "startButton";
+            this.startButton.Size = new System.Drawing.Size(75, 23);
+            this.startButton.TabIndex = 7;
+            this.startButton.Text = "Start";
+            this.startButton.UseVisualStyleBackColor = true;
+            this.startButton.Click += new System.EventHandler(this.StartButton_Click);
+            // 
+            // cancelButton
+            // 
+            this.cancelButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.cancelButton.Location = new System.Drawing.Point(104, 259);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 8;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.CancelButton_Click);
+            // 
+            // layoutTypeGroupBox
+            // 
+            this.layoutTypeGroupBox.Controls.Add(this.logicalLayoutRadioButton);
+            this.layoutTypeGroupBox.Controls.Add(this.physicalLayoutRadioButton);
+            this.layoutTypeGroupBox.Location = new System.Drawing.Point(22, 154);
+            this.layoutTypeGroupBox.Name = "layoutTypeGroupBox";
+            this.layoutTypeGroupBox.Size = new System.Drawing.Size(380, 50);
+            this.layoutTypeGroupBox.TabIndex = 9;
+            this.layoutTypeGroupBox.TabStop = false;
+            this.layoutTypeGroupBox.Text = "View Log File As";
+            // 
+            // physicalLayoutRadioButton
+            // 
+            this.physicalLayoutRadioButton.AutoSize = true;
+            this.physicalLayoutRadioButton.Checked = true;
+            this.physicalLayoutRadioButton.Location = new System.Drawing.Point(6, 19);
+            this.physicalLayoutRadioButton.Name = "physicalLayoutRadioButton";
+            this.physicalLayoutRadioButton.Size = new System.Drawing.Size(64, 17);
+            this.physicalLayoutRadioButton.TabIndex = 0;
+            this.physicalLayoutRadioButton.TabStop = true;
+            this.physicalLayoutRadioButton.Text = "Physical";
+            this.physicalLayoutRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // logicalLayoutRadioButton
+            // 
+            this.logicalLayoutRadioButton.AutoSize = true;
+            this.logicalLayoutRadioButton.Location = new System.Drawing.Point(82, 19);
+            this.logicalLayoutRadioButton.Name = "logicalLayoutRadioButton";
+            this.logicalLayoutRadioButton.Size = new System.Drawing.Size(59, 17);
+            this.logicalLayoutRadioButton.TabIndex = 1;
+            this.logicalLayoutRadioButton.TabStop = true;
+            this.logicalLayoutRadioButton.Text = "Logical";
+            this.logicalLayoutRadioButton.UseVisualStyleBackColor = true;
+            // 
+            // showVlfNumberCheckBox
+            // 
+            this.showVlfNumberCheckBox.AutoSize = true;
+            this.showVlfNumberCheckBox.Checked = true;
+            this.showVlfNumberCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.showVlfNumberCheckBox.Location = new System.Drawing.Point(22, 221);
+            this.showVlfNumberCheckBox.Name = "showVlfNumberCheckBox";
+            this.showVlfNumberCheckBox.Size = new System.Drawing.Size(189, 17);
+            this.showVlfNumberCheckBox.TabIndex = 10;
+            this.showVlfNumberCheckBox.Text = "Show VLF number if space permits";
+            this.showVlfNumberCheckBox.UseVisualStyleBackColor = true;
+            // 
             // LiveViewOptionsForm
             // 
+            this.AcceptButton = this.startButton;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(414, 279);
-            this.Controls.Add(this.numericUpDown1);
+            this.CancelButton = this.cancelButton;
+            this.ClientSize = new System.Drawing.Size(414, 312);
+            this.Controls.Add(this.showVlfNumberCheckBox);
+            this.Controls.Add(this.layoutTypeGroupBox);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.startButton);
+            this.Controls.Add(this.refreshIntervalSeconds);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.changeConnectionButton);
             this.Controls.Add(this.databaseTextBox);
             this.Controls.Add(this.databaseLabel);
             this.Controls.Add(this.connectToTextBox);
             this.Controls.Add(this.connectToLabel);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "LiveViewOptionsForm";
             this.Text = "Live View Options";
             this.Load += new System.EventHandler(this.LiveViewOptions_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.refreshIntervalSeconds)).EndInit();
+            this.layoutTypeGroupBox.ResumeLayout(false);
+            this.layoutTypeGroupBox.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -136,6 +230,12 @@
         private System.Windows.Forms.TextBox databaseTextBox;
         private System.Windows.Forms.Button changeConnectionButton;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.NumericUpDown refreshIntervalSeconds;
+        private System.Windows.Forms.Button startButton;
+        private System.Windows.Forms.Button cancelButton;
+        private System.Windows.Forms.GroupBox layoutTypeGroupBox;
+        private System.Windows.Forms.RadioButton logicalLayoutRadioButton;
+        private System.Windows.Forms.RadioButton physicalLayoutRadioButton;
+        private System.Windows.Forms.CheckBox showVlfNumberCheckBox;
     }
 }
