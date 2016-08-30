@@ -17,6 +17,8 @@ namespace LsnConverter
         private Dictionary<TextBox, LogSequenceNumber.LsnStringType> _inputTextBoxConverter;
         private Dictionary<TextBox, Label> _labelMapping;
         private Font _baseTextBoxFont;
+        private Size _baseTextBoxSize;
+        private Size _baseFormSize;
         private Font _baseLabelFont;
         private int _bottomMargin;
         private int _rightMargin;
@@ -44,6 +46,8 @@ namespace LsnConverter
             };
 
             _baseTextBoxFont = decimalTextBox.Font;
+            _baseTextBoxSize = decimalTextBox.Size;
+            _baseFormSize = this.Size;
             _baseLabelFont = decimalLabel.Font;
             _bottomMargin = this.Height - _inputTextBoxConverter.Keys.Max(t => t.Bottom);
             _rightMargin = this.Width - _inputTextBoxConverter.Keys.Max(t => t.Right);
@@ -115,7 +119,7 @@ namespace LsnConverter
             }
         }
 
-       private void ZoomComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void ZoomComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             string zoomString = zoomComboBox.Text;
             if (string.IsNullOrEmpty(zoomString))
@@ -142,7 +146,6 @@ namespace LsnConverter
                 _labelMapping[textBox].Font = labelFont;
             }
 
-
             // Fixup spacing
             List<TextBox> boxes = _inputTextBoxConverter.Keys.ToList();
             boxes.Sort((x, y) => x.Top.CompareTo(y.Top));
@@ -157,15 +160,17 @@ namespace LsnConverter
             }
 
             int maxLabelWidth = _labelMapping.Values.Max(l => l.Width);
+            int textBoxWidth = (int)(_baseTextBoxSize.Width * zoom);
             foreach (TextBox box in _labelMapping.Keys)
             {
                 box.Left = maxLabelWidth + 40;
+                box.Width = textBoxWidth;
             }
 
             int maxTextBoxWidth = _labelMapping.Keys.Max(t => t.Width);
 
             this.Height = maxBottom + _bottomMargin;
-            this.Width = maxTextBoxWidth + _rightMargin;
+            this.Width = Math.Max(maxLabelWidth + 40 + maxTextBoxWidth + _rightMargin, _baseFormSize.Width);
         }
     }
 }

@@ -53,8 +53,6 @@
             // 
             // decimalTextBox
             // 
-            this.decimalTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.decimalTextBox.Location = new System.Drawing.Point(161, 39);
             this.decimalTextBox.Name = "decimalTextBox";
             this.decimalTextBox.Size = new System.Drawing.Size(208, 20);
@@ -64,8 +62,6 @@
             // 
             // hexadecimalSeparatedTextBox
             // 
-            this.hexadecimalSeparatedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.hexadecimalSeparatedTextBox.Location = new System.Drawing.Point(161, 73);
             this.hexadecimalSeparatedTextBox.Name = "hexadecimalSeparatedTextBox";
             this.hexadecimalSeparatedTextBox.Size = new System.Drawing.Size(208, 20);
@@ -82,8 +78,6 @@
             // 
             // decimalSeparatedTextBox
             // 
-            this.decimalSeparatedTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.decimalSeparatedTextBox.Location = new System.Drawing.Point(161, 142);
             this.decimalSeparatedTextBox.Name = "decimalSeparatedTextBox";
             this.decimalSeparatedTextBox.Size = new System.Drawing.Size(208, 20);
@@ -100,8 +94,6 @@
             // 
             // hexadecimalTextBox
             // 
-            this.hexadecimalTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.hexadecimalTextBox.Location = new System.Drawing.Point(161, 108);
             this.hexadecimalTextBox.Name = "hexadecimalTextBox";
             this.hexadecimalTextBox.Size = new System.Drawing.Size(208, 20);

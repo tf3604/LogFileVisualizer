@@ -21,25 +21,18 @@ namespace LogFileVisualizer
 
         public static void Render(LogStatsDal dal, LiveViewOptions options)
         {
-            try
-            {
-                List<DbccLogInfoItem> vlfs = dal.ReadDbccLogInfo(null, true);
+            List<DbccLogInfoItem> vlfs = dal.ReadDbccLogInfo(null, true);
 
-                using (Bitmap bitmap = CreateImage(vlfs, options))
-                {
-                    if (options.DisplaySurface.InvokeRequired)
-                    {
-                        options.DisplaySurface.Invoke(new Action<LiveViewOptions, Bitmap>(SetImage), options, bitmap);
-                    }
-                    else
-                    {
-                        SetImage(options, bitmap);
-                    }
-                }
-            }
-            catch (Exception ex)
+            using (Bitmap bitmap = CreateImage(vlfs, options))
             {
-                int i = 0;
+                if (options.DisplaySurface.InvokeRequired)
+                {
+                    options.DisplaySurface.Invoke(new Action<LiveViewOptions, Bitmap>(SetImage), options, bitmap);
+                }
+                else
+                {
+                    SetImage(options, bitmap);
+                }
             }
         }
 
