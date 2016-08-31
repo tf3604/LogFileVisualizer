@@ -130,19 +130,29 @@ namespace LogFileVisualizerLib
                 throw new ArgumentNullException(nameof(hexadecimal));
             }
 
-            hexadecimal = hexadecimal.ToLowerInvariant();
+            hexadecimal = hexadecimal.Trim();
 
-            if (hexadecimal.StartsWith("0x") == false)
+            if (hexadecimal.StartsWith("0x"))
             {
-                throw new ArgumentException("Hexadecimal LSN must start with '0x'.", nameof(hexadecimal));
+                // Strip off "0x"
+                hexadecimal = hexadecimal.Substring(2);
             }
 
-            // Strip off "0x"
-            hexadecimal = hexadecimal.Substring(2);
+            // Pad out to 22 characters
+            if (hexadecimal.Length < 20)
+            {
+                hexadecimal = new string('0', 20 - hexadecimal.Length) + hexadecimal;
+            }
 
-            byte[] array = HexToByteArray(hexadecimal);
-            decimal decimalValue = BytesToDecimal(array);
+            string vlfString = hexadecimal.Substring(0, 8);
+            string logBlockString = hexadecimal.Substring(8, 8);
+            string logRecordString = hexadecimal.Substring(16, 4);
 
+            int vlfNumber = HexToInt(vlfString);
+            int logBlockNumber = HexToInt(logBlockString);
+            int logRecordNumber = HexToInt(logRecordString);
+
+            decimal decimalValue = vlfNumber * 1000000000000000m + logBlockNumber * 100000m + logRecordNumber;
             return decimalValue;
         }
 

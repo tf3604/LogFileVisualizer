@@ -83,8 +83,13 @@ namespace LsnConverter
         private void Update(object sender)
         {
             TextBox textBox = sender as TextBox;
+            LogSequenceNumber previousLsnValue = _lsnValue;
             LoadValueAndConvert(textBox);
-            //textBox.Focus();
+            if (previousLsnValue != _lsnValue)
+            {
+                SetBackgroundColor(textBox);
+                ResetFocus(textBox);
+            }
             textBox.SelectAll();
         }
 
@@ -106,6 +111,32 @@ namespace LsnConverter
             }
 
             foreach (TextBox textBox in _inputTextBoxConverter.Keys)
+            {
+                if (master != textBox)
+                {
+                    textBox.Text = _lsnValue.ToString(_inputTextBoxConverter[textBox]);
+                }
+            }
+        }
+
+        private void ResetFocus(TextBox master)
+        {
+            // Did the focus move to another TextBox?
+            bool textBoxHasFocus = false;
+            foreach (TextBox textBox in _labelMapping.Keys)
+            {
+                textBoxHasFocus |= textBox.ContainsFocus;
+            }
+
+            if (textBoxHasFocus)
+            {
+                master.Focus();
+            }
+        }
+
+        private void SetBackgroundColor(TextBox master)
+        {
+            foreach (TextBox textBox in _labelMapping.Keys)
             {
                 if (master == textBox)
                 {

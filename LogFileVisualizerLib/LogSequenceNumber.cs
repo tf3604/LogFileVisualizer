@@ -45,6 +45,62 @@ namespace LogFileVisualizerLib
             }
         }
 
+        public static bool operator ==(LogSequenceNumber lsn1, LogSequenceNumber lsn2)
+        {
+            if ((object)lsn1 == null &&
+                (object)lsn2 == null)
+            {
+                return true;
+            }
+
+            if (((object)lsn1 == null && (object)lsn2 != null) |
+                ((object)lsn1 != null && (object)lsn2 == null))
+            {
+                return false;
+            }
+
+            return lsn1._lsnValue == lsn2._lsnValue;
+        }
+
+        public static bool operator !=(LogSequenceNumber lsn1, LogSequenceNumber lsn2)
+        {
+            return !(lsn1 == lsn2);
+        }
+
+        public static bool operator >(LogSequenceNumber lsn1, LogSequenceNumber lsn2)
+        {
+            if ((object)lsn1 == null &&
+                (object)lsn2 == null)
+            {
+                return true;
+            }
+
+            if (((object)lsn1 == null && (object)lsn2 != null) |
+                ((object)lsn1 != null && (object)lsn2 == null))
+            {
+                return false;
+            }
+
+            return lsn1._lsnValue > lsn2._lsnValue;
+        }
+
+        public static bool operator <(LogSequenceNumber lsn1, LogSequenceNumber lsn2)
+        {
+            if ((object)lsn1 == null &&
+                (object)lsn2 == null)
+            {
+                return true;
+            }
+
+            if (((object)lsn1 == null && (object)lsn2 != null) |
+                ((object)lsn1 != null && (object)lsn2 == null))
+            {
+                return false;
+            }
+
+            return lsn1._lsnValue < lsn2._lsnValue;
+        }
+
         public decimal ToDecimal()
         {
             return _lsnValue;
