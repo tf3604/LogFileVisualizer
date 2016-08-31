@@ -66,6 +66,8 @@
             this.hexadecimalSeparatedTextBox.Name = "hexadecimalSeparatedTextBox";
             this.hexadecimalSeparatedTextBox.Size = new System.Drawing.Size(208, 20);
             this.hexadecimalSeparatedTextBox.TabIndex = 3;
+            this.hexadecimalSeparatedTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyUp);
+            this.hexadecimalSeparatedTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // hexadecimalSeparatedLabel
             // 
@@ -82,6 +84,8 @@
             this.decimalSeparatedTextBox.Name = "decimalSeparatedTextBox";
             this.decimalSeparatedTextBox.Size = new System.Drawing.Size(208, 20);
             this.decimalSeparatedTextBox.TabIndex = 7;
+            this.decimalSeparatedTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyUp);
+            this.decimalSeparatedTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // decimalSeparatedLabel
             // 
@@ -98,6 +102,8 @@
             this.hexadecimalTextBox.Name = "hexadecimalTextBox";
             this.hexadecimalTextBox.Size = new System.Drawing.Size(208, 20);
             this.hexadecimalTextBox.TabIndex = 5;
+            this.hexadecimalTextBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.TextBox_KeyUp);
+            this.hexadecimalTextBox.Leave += new System.EventHandler(this.TextBox_Leave);
             // 
             // hexadecimalLabel
             // 

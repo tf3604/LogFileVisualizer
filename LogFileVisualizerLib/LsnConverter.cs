@@ -137,13 +137,11 @@ namespace LogFileVisualizerLib
                 throw new ArgumentException("Hexadecimal LSN must start with '0x'.", nameof(hexadecimal));
             }
 
+            // Strip off "0x"
             hexadecimal = hexadecimal.Substring(2);
 
-            decimal decimalValue;
-            if (decimal.TryParse(hexadecimal, NumberStyles.HexNumber, CultureInfo.InvariantCulture, out decimalValue) == false)
-            {
-                throw new ArgumentException("Unable to convert value from hexadecimal: " + hexadecimal);
-            }
+            byte[] array = HexToByteArray(hexadecimal);
+            decimal decimalValue = BytesToDecimal(array);
 
             return decimalValue;
         }
@@ -195,6 +193,23 @@ namespace LogFileVisualizerLib
         private static int HexToInt(string hex)
         {
             return int.Parse(hex, NumberStyles.HexNumber);
+        }
+
+        private static byte[] HexToByteArray(string hex)
+        {
+            if (hex.Length % 2 != 0)
+            {
+                hex = "0" + hex;
+            }
+
+            List<byte> bytes = new List<byte>();
+            for (int index = 0; index < hex.Length; index += 2)
+            {
+                byte value = (byte)HexToInt(hex.Substring(index, 2));
+                bytes.Add(value);
+            }
+
+            return bytes.ToArray();
         }
 
         private static string IntToHex(int value, int nbrCharacters)
