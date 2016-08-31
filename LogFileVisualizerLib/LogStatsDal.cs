@@ -49,7 +49,7 @@ namespace LogFileVisualizerLib
             else
             {
                 sql = LogFileVisualizerResources.DbccLoginfo;
-                SqlParameter lsnParameter = new SqlParameter("lastKnownLsn", GetParameterValue(lastKnownLsn?.ToString(LogSequenceNumber.LsnStringType.DecimalSeparated)));
+                SqlParameter lsnParameter = new SqlParameter("lastKnownLsn", GetParameterValue(lastKnownLsn?.ToString(LsnStringType.DecimalSeparated)));
                 parameters = new SqlParameter[1] { lsnParameter };
             }
 
@@ -81,7 +81,7 @@ namespace LogFileVisualizerLib
 
                     if (useLiteVersion == false)
                     {
-                        item.LastKnownLsn = new LogSequenceNumber(GetObjectValue<string>(row, "CurrentLsnHex"), LogSequenceNumber.LsnStringType.HexidecimalSeparated);
+                        item.LastKnownLsn = new LogSequenceNumber(GetObjectValue<string>(row, "CurrentLsnHex"), LsnStringType.HexidecimalSeparated);
                     }
 
                     list.Add(item);

@@ -148,12 +148,14 @@ namespace LogFileVisualizerLib
             }
         }
 
-        public enum LsnStringType
+        public override bool Equals(object obj)
         {
-            HexidecimalSeparated,
-            DecimalSeparated,
-            Hexadecimal,
-            Decimal
+            return this == (LogSequenceNumber)obj;
+        }
+
+        public override int GetHashCode()
+        {
+            return _lsnValue.GetHashCode();
         }
     }
 }

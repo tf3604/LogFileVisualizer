@@ -61,6 +61,7 @@
       <DependentUpon>LogFileVisualizerResources.resx</DependentUpon>
     </Compile>
     <Compile Include="LsnConverter.cs" />
+    <Compile Include="LsnStringType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="LogStatsCapture.cs" />
     <Compile Include="Utilities.cs" />

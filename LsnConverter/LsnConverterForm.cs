@@ -30,7 +30,7 @@ namespace LsnConverter
     public partial class LsnConverterForm : Form
     {
         private LogSequenceNumber _lsnValue;
-        private Dictionary<TextBox, LogSequenceNumber.LsnStringType> _inputTextBoxConverter;
+        private Dictionary<TextBox, LsnStringType> _inputTextBoxConverter;
         private Dictionary<TextBox, Label> _labelMapping;
         private Font _baseTextBoxFont;
         private Size _baseTextBoxSize;
@@ -45,12 +45,12 @@ namespace LsnConverter
         {
             InitializeComponent();
 
-            _inputTextBoxConverter = new Dictionary<TextBox, LogSequenceNumber.LsnStringType>()
+            _inputTextBoxConverter = new Dictionary<TextBox, LsnStringType>()
             {
-                { decimalTextBox, LogSequenceNumber.LsnStringType.Decimal },
-                { hexadecimalSeparatedTextBox, LogSequenceNumber.LsnStringType.HexidecimalSeparated },
-                { hexadecimalTextBox, LogSequenceNumber.LsnStringType.Hexadecimal },
-                { decimalSeparatedTextBox, LogSequenceNumber.LsnStringType.DecimalSeparated }
+                { decimalTextBox, LsnStringType.Decimal },
+                { hexadecimalSeparatedTextBox, LsnStringType.HexidecimalSeparated },
+                { hexadecimalTextBox, LsnStringType.Hexadecimal },
+                { decimalSeparatedTextBox, LsnStringType.DecimalSeparated }
             };
 
             _labelMapping = new Dictionary<TextBox, Label>()
