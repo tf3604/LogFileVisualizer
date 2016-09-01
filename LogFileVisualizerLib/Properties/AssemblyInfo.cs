@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("LogFileVisualizerLib")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("tf3604.com")]
 [assembly: AssemblyProduct("LogFileVisualizerLib")]
 [assembly: AssemblyCopyright("Copyright © Brian Hansen 2016")]
 [assembly: AssemblyTrademark("")]

@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("LogFileInfoCapture")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("tf3604.com")]
 [assembly: AssemblyProduct("LogFileInfoCapture")]
 [assembly: AssemblyCopyright("Copyright © Brian Hansen 2016")]
 [assembly: AssemblyTrademark("")]
