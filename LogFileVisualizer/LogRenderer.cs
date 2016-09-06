@@ -35,7 +35,12 @@ namespace LogFileVisualizer
         private static int _verticalSpacing = 2;
         private static int _horizontalSpacing = 2;
 
-        public static string Render(LogStatsDal dal, LiveViewOptions options)
+        private static Brush _activeVlfBrush = new SolidBrush(VisualizerSettings.Instance.ActiveVlfColor.Value);
+        private static Brush _currentVlfBrush = new SolidBrush(VisualizerSettings.Instance.CurrentVlfColor.Value);
+        private static Brush _inactiveVlfBrush = new SolidBrush(VisualizerSettings.Instance.InactiveVlfColor.Value);
+        private static Brush _vlfFontBrush = new SolidBrush(VisualizerSettings.Instance.VlfFontColor.Value);
+
+        public static void Render(LogStatsDal dal, LiveViewOptions options)
         {
             List<DbccLogInfoItem> vlfs = dal.ReadDbccLogInfo(null, true);
 
@@ -51,13 +56,31 @@ namespace LogFileVisualizer
                 }
             }
 
-            string statusMessage = $"Instance: {dal.InstanceName}; Database: {dal.DatabaseName}; Recovery mode: {dal.GetCurrentDatabaseRecoveryModel()}; VLFs: {vlfs.Count}";
-            return statusMessage;
+            long totalLogSize = vlfs.Sum(v => v.FileSize);
+            string displaySize = Utilities.FriendlySize(totalLogSize);
+
+            DatabaseInfo dbInfo = dal.GetCurrentDatabaseInfo();
+
+            string statusMessage = $"Instance: {dal.InstanceName}; Database: {dal.DatabaseName}; Recovery mode: {dbInfo.RecoveryModelDescription}; Log size: {displaySize}; VLFs: {vlfs.Count}; Wait: {dbInfo.LogReuseWaitDescription}; Last refresh: {DateTime.Now:HH:mm:ss}";
+
+            if (options.StatusLabel.GetCurrentParent().InvokeRequired)
+            {
+                options.StatusLabel.GetCurrentParent().Invoke(new Action<LiveViewOptions, string>(SetStatus), options, statusMessage);
+            }
+            else
+            {
+                SetStatus(options, statusMessage);
+            }
         }
 
         private static void SetImage(LiveViewOptions options, Bitmap bitmap)
         {
             options.DisplaySurface.Image = bitmap.Clone() as Bitmap;
+        }
+
+        private static void SetStatus(LiveViewOptions options, string message)
+        {
+            options.StatusLabel.Text = message;
         }
 
         private static Bitmap CreateImage(List<DbccLogInfoItem> vlfs, LiveViewOptions options)
@@ -97,7 +120,7 @@ namespace LogFileVisualizer
             Font font = null;
             if (simulateOnly == false)
             {
-                font = new Font("Times New Roman", 10);
+                font = new Font(VisualizerSettings.Instance.VlfFontName, VisualizerSettings.Instance.VlfFontSize.Value);
             }
 
             for (int vlfIndex = 0; vlfIndex < vlfs.Count; vlfIndex++)
@@ -118,7 +141,7 @@ namespace LogFileVisualizer
 
                 if (simulateOnly == false)
                 {
-                    Brush blockBrush = vlf.Status == 2 ? ((vlf == currentVlf) ? Brushes.Yellow : Brushes.Red) : Brushes.Green;
+                    Brush blockBrush = vlf.Status == 2 ? ((vlf == currentVlf) ? _currentVlfBrush : _activeVlfBrush) : _inactiveVlfBrush;
                     graphics.FillRectangle(blockBrush, blockLeft, blockTop, blockWidth, blockHeight);
 
                     if (options.ShowVlfNumbers &&
@@ -134,7 +157,7 @@ namespace LogFileVisualizer
                                 blockTop + blockHeight * 0.5f - textSize.Height * 0.5f,
                                 textSize.Width,
                                 textSize.Height);
-                            graphics.DrawString(vlfNumber, font, Brushes.Black, textRectangle);
+                            graphics.DrawString(vlfNumber, font, _vlfFontBrush, textRectangle);
                         }
                     }
                 }
