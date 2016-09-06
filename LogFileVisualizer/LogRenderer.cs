@@ -35,7 +35,7 @@ namespace LogFileVisualizer
         private static int _verticalSpacing = 2;
         private static int _horizontalSpacing = 2;
 
-        public static void Render(LogStatsDal dal, LiveViewOptions options)
+        public static string Render(LogStatsDal dal, LiveViewOptions options)
         {
             List<DbccLogInfoItem> vlfs = dal.ReadDbccLogInfo(null, true);
 
@@ -50,6 +50,9 @@ namespace LogFileVisualizer
                     SetImage(options, bitmap);
                 }
             }
+
+            string statusMessage = $"Instance: {dal.InstanceName}; Database: {dal.DatabaseName}; Recovery mode: {dal.GetCurrentDatabaseRecoveryModel()}; VLFs: {vlfs.Count}";
+            return statusMessage;
         }
 
         private static void SetImage(LiveViewOptions options, Bitmap bitmap)

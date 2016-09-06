@@ -90,5 +90,18 @@ namespace LogFileVisualizerLib
                 return list;
             }
         }
+
+        public string GetCurrentDatabaseRecoveryModel()
+        {
+            string sql = @"select db.recovery_model_desc from sys.databases db where db.database_id = db_id();";
+            using (DataTable table = ExecuteSqlOneResultset(sql))
+            {
+                if (table.Rows.Count < 1)
+                {
+                    return null;
+                }
+                return table.Rows[0]["recovery_model_desc"] as string;
+            }
+        }
     }
 }

@@ -64,6 +64,32 @@ namespace LogFileVisualizerLib
             _connection = connection.Connection;
         }
 
+        public string InstanceName
+        {
+            get
+            {
+                if (_connection == null)
+                {
+                    return null;
+                }
+                SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder(_connection.ConnectionString);
+                return sb.DataSource;
+            }
+        }
+
+        public string DatabaseName
+        {
+            get
+            {
+                if (_connection == null)
+                {
+                    return null;
+                }
+                SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder(_connection.ConnectionString);
+                return sb.InitialCatalog;
+            }
+        }
+
         public void Dispose()
         {
             Dispose(true);
