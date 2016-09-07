@@ -82,5 +82,13 @@ namespace LogFileVisualizer
 
             stopButton.Enabled = false;
         }
+
+        private void OptionsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (OptionsForm form = new OptionsForm())
+            {
+                form.ShowDialog();
+            }
+        }
     }
 }
