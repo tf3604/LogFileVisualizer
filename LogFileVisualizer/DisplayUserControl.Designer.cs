@@ -57,6 +57,7 @@
             this.activeVlfColorComboBox.Name = "activeVlfColorComboBox";
             this.activeVlfColorComboBox.Size = new System.Drawing.Size(144, 21);
             this.activeVlfColorComboBox.TabIndex = 1;
+            this.activeVlfColorComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
             // activeVlfCustomButton
             // 

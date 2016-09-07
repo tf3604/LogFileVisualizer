@@ -88,5 +88,10 @@ namespace LogFileVisualizer
 
             box.SelectedIndex = 0;
         }
+
+        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
