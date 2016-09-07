@@ -13,6 +13,10 @@ namespace LogFileVisualizer
 {
     public partial class DisplayUserControl : UserControl
     {
+        private static List<Color> _knownColors = null;
+        private static List<string> _knownFonts = null;
+        private static object _initializerLocker = new object();
+
         private Dictionary<Button, ColorComboBox> _buttonComboBoxMapping;
         private Dictionary<Button, string> _buttonSettingsPropertyMapping;
         private bool _isInitializing = true;
@@ -63,6 +67,8 @@ namespace LogFileVisualizer
         private void DisplayUserControl_Load(object sender, EventArgs e)
         {
             _isInitializing = true;
+            LoadFontsAndColors();
+
             foreach (Button button in _buttonComboBoxMapping.Keys)
             {
                 InitializeColors(button);
@@ -91,12 +97,8 @@ namespace LogFileVisualizer
             box.Items.Clear();
             box.Items.Add(currentValue);
 
-            Type colorType = typeof(Color);
-            List<PropertyInfo> colorProperties = colorType.GetProperties(BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Public).ToList();
-            colorProperties.Sort((a, b) => a.Name.CompareTo(b.Name));
-            foreach (PropertyInfo property in colorProperties)
+            foreach (Color color in _knownColors)
             {
-                Color color = (Color)property.GetMethod.Invoke(null, null);
                 box.Items.Add(color);
             }
 
@@ -105,6 +107,31 @@ namespace LogFileVisualizer
 
         private void InitializeFonts()
         {
+        }
+
+        private void LoadFontsAndColors()
+        {
+            lock (_initializerLocker)
+            {
+                if (_knownColors == null)
+                {
+                    _knownColors = new List<Color>();
+
+                    Type colorType = typeof(Color);
+                    List<PropertyInfo> colorProperties = colorType.GetProperties(BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Public).ToList();
+                    colorProperties.Sort((a, b) => a.Name.CompareTo(b.Name));
+                    foreach (PropertyInfo property in colorProperties)
+                    {
+                        Color color = (Color)property.GetMethod.Invoke(null, null);
+                        _knownColors.Add(color);
+                    }
+                }
+
+                if (_knownFonts == null)
+                {
+                    _knownFonts = new List<string>();
+                }
+            }
         }
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
