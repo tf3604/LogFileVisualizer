@@ -50,6 +50,8 @@
             // 
             // activeVlfColorComboBox
             // 
+            this.activeVlfColorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.activeVlfColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.activeVlfColorComboBox.FormattingEnabled = true;
             this.activeVlfColorComboBox.Location = new System.Drawing.Point(125, 4);
             this.activeVlfColorComboBox.Name = "activeVlfColorComboBox";
@@ -64,6 +66,7 @@
             this.activeVlfCustomButton.TabIndex = 2;
             this.activeVlfCustomButton.Text = "Custom ...";
             this.activeVlfCustomButton.UseVisualStyleBackColor = true;
+            this.activeVlfCustomButton.Click += new System.EventHandler(this.CustomButton_Click);
             // 
             // currentVlfCustomButton
             // 
@@ -73,9 +76,12 @@
             this.currentVlfCustomButton.TabIndex = 5;
             this.currentVlfCustomButton.Text = "Custom ...";
             this.currentVlfCustomButton.UseVisualStyleBackColor = true;
+            this.currentVlfCustomButton.Click += new System.EventHandler(this.CustomButton_Click);
             // 
             // currentVlfColorComboBox
             // 
+            this.currentVlfColorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.currentVlfColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.currentVlfColorComboBox.FormattingEnabled = true;
             this.currentVlfColorComboBox.Location = new System.Drawing.Point(125, 34);
             this.currentVlfColorComboBox.Name = "currentVlfColorComboBox";
@@ -99,9 +105,12 @@
             this.inactiveVlfCustomButton.TabIndex = 8;
             this.inactiveVlfCustomButton.Text = "Custom ...";
             this.inactiveVlfCustomButton.UseVisualStyleBackColor = true;
+            this.inactiveVlfCustomButton.Click += new System.EventHandler(this.CustomButton_Click);
             // 
             // inactiveVlfColorComboBox
             // 
+            this.inactiveVlfColorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.inactiveVlfColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.inactiveVlfColorComboBox.FormattingEnabled = true;
             this.inactiveVlfColorComboBox.Location = new System.Drawing.Point(124, 65);
             this.inactiveVlfColorComboBox.Name = "inactiveVlfColorComboBox";

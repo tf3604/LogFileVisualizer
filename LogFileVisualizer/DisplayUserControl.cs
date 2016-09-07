@@ -33,5 +33,29 @@ namespace LogFileVisualizer
                 { inactiveVlfCustomButton, "InactiveVlfColor" }
             };
         }
+
+        private void CustomButton_Click(object sender, EventArgs e)
+        {
+            Button button = sender as Button;
+            if (_buttonComboBoxMapping.ContainsKey(button) == false)
+            {
+                return;
+            }
+            ColorComboBox box = _buttonComboBoxMapping[button];
+
+            if (box.Items.Count > 0)
+            {
+                using (ColorDialog dialog = new ColorDialog())
+                {
+                    dialog.AnyColor = true;
+                    dialog.FullOpen = true;
+                    dialog.Color = (Color)box.Items[0];
+                    if (dialog.ShowDialog() == DialogResult.OK)
+                    {
+                        box.Items[0] = dialog.Color;
+                    }
+                }
+            }
+        }
     }
 }
