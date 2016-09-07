@@ -21,9 +21,9 @@ namespace LogFileVisualizer
 
             _buttonComboBoxMapping = new Dictionary<Button, ColorComboBox>()
             {
-                { activeVlfCustomButton, activeVlfColorComboBox },
-                { currentVlfCustomButton, currentVlfColorComboBox },
-                { inactiveVlfCustomButton, inactiveVlfColorComboBox }
+                //{ activeVlfCustomButton, activeVlfColorComboBox },
+                //{ currentVlfCustomButton, currentVlfColorComboBox },
+                //{ inactiveVlfCustomButton, inactiveVlfColorComboBox }
             };
 
             _buttonSettingsPropertyMapping = new Dictionary<Button, string>()
