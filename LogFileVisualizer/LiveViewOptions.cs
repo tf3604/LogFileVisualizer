@@ -81,6 +81,12 @@ namespace LogFileVisualizer
             set;
         }
 
+        public ToolStripStatusLabel StatusLabel
+        {
+            get;
+            set;
+        }
+
         private string _connectionString
         {
             get

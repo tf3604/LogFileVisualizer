@@ -27,7 +27,7 @@ namespace LogFileVisualizerLib
     public class LogStatsDal : DalBase
     {
         public LogStatsDal(string instanceName, string databaseName)
-            : base (instanceName, databaseName)
+            : base(instanceName, databaseName)
         {
         }
 
@@ -91,16 +91,21 @@ namespace LogFileVisualizerLib
             }
         }
 
-        public string GetCurrentDatabaseRecoveryModel()
+        public DatabaseInfo GetCurrentDatabaseInfo()
         {
-            string sql = @"select db.recovery_model_desc from sys.databases db where db.database_id = db_id();";
+            string sql = @"select db.recovery_model_desc, db.log_reuse_wait_desc from sys.databases db where db.database_id = db_id();";
             using (DataTable table = ExecuteSqlOneResultset(sql))
             {
                 if (table.Rows.Count < 1)
                 {
                     return null;
                 }
-                return table.Rows[0]["recovery_model_desc"] as string;
+
+                DatabaseInfo dbInfo = new DatabaseInfo();
+                dbInfo.RecoveryModelDescription = table.Rows[0]["recovery_model_desc"] as string;
+                dbInfo.LogReuseWaitDescription = table.Rows[0]["log_reuse_wait_desc"] as string;
+
+                return dbInfo;
             }
         }
     }

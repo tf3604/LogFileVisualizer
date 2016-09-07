@@ -49,6 +49,7 @@
     <Compile Include="ApplicationSqlConnection.cs" />
     <Compile Include="CaptureDal.cs" />
     <Compile Include="Dal.cs" />
+    <Compile Include="DatabaseInfo.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="DalBase.cs" />
     <Compile Include="DbccLogInfoItem.cs" />

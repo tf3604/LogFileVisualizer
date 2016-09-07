@@ -19,6 +19,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,6 +71,7 @@ namespace LogFileVisualizerLib
             sb.DataSource = instanceName;
             sb.InitialCatalog = databaseName;
             sb.IntegratedSecurity = true;
+            sb.ApplicationName = ((AssemblyTitleAttribute)Attribute.GetCustomAttribute(Assembly.GetExecutingAssembly(), typeof(AssemblyTitleAttribute), false)).Title;
 
             _connection = new SqlConnection(sb.ToString());
             _connection.Open();

@@ -47,6 +47,7 @@ namespace LogFileVisualizer
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     VisualizerSettings.Instance.LiveViewOptions.DisplaySurface = displayPictureBox;
+                    VisualizerSettings.Instance.LiveViewOptions.StatusLabel = statusLabel;
                     _displayMode = DisplayMode.LiveView;
 
                     InitializeDisplay();
@@ -62,6 +63,7 @@ namespace LogFileVisualizer
 
         private void InitializeDisplay()
         {
+            liveViewMenuItem.Enabled = false;
             stopButton.Enabled = true;
         }
 
@@ -80,6 +82,7 @@ namespace LogFileVisualizer
                 _liveViewVisualizer.Cancel();
             }
 
+            liveViewMenuItem.Enabled = true;
             stopButton.Enabled = false;
         }
 

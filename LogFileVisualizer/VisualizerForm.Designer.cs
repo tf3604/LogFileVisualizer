@@ -32,14 +32,16 @@
             this.mainMenu = new System.Windows.Forms.MenuStrip();
             this.fileMenu = new System.Windows.Forms.ToolStripMenuItem();
             this.liveViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.primaryToolStrip = new System.Windows.Forms.ToolStrip();
             this.stopButton = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.displayPictureBox = new System.Windows.Forms.PictureBox();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenu.SuspendLayout();
+            this.statusStrip.SuspendLayout();
             this.primaryToolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.displayPictureBox)).BeginInit();
@@ -67,12 +69,30 @@
             // liveViewMenuItem
             // 
             this.liveViewMenuItem.Name = "liveViewMenuItem";
-            this.liveViewMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.liveViewMenuItem.Size = new System.Drawing.Size(123, 22);
             this.liveViewMenuItem.Text = "&Live View";
             this.liveViewMenuItem.Click += new System.EventHandler(this.LiveViewMenuItem_Click);
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.optionsToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.toolsToolStripMenuItem.Text = "&Tools";
+            // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.optionsToolStripMenuItem.Text = "&Options";
+            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
+            // 
             // statusStrip
             // 
+            this.statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.statusLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 411);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(787, 22);
@@ -122,20 +142,10 @@
             this.displayPictureBox.TabIndex = 0;
             this.displayPictureBox.TabStop = false;
             // 
-            // toolsToolStripMenuItem
+            // statusLabel
             // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.toolsToolStripMenuItem.Text = "&Tools";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.optionsToolStripMenuItem.Text = "&Options";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
             // 
             // VisualizerForm
             // 
@@ -151,6 +161,8 @@
             this.Text = "SQL Server Log File Visualizer";
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
+            this.statusStrip.ResumeLayout(false);
+            this.statusStrip.PerformLayout();
             this.primaryToolStrip.ResumeLayout(false);
             this.primaryToolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -172,6 +184,7 @@
         private System.Windows.Forms.ToolStripButton stopButton;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
     }
 }
 

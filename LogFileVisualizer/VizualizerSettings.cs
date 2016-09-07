@@ -57,7 +57,7 @@ namespace LogFileVisualizer
         {
             get
             {
-                lock(_instanceLocker)
+                lock (_instanceLocker)
                 {
                     if (_instance == null)
                     {
@@ -72,7 +72,7 @@ namespace LogFileVisualizer
         {
             get
             {
-                lock(_cloneLocker)
+                lock (_cloneLocker)
                 {
                     if (_clone == null)
                     {
