@@ -54,6 +54,9 @@
     <Compile Include="ColorComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="ColorComboBox.Designer.cs">
+      <DependentUpon>ColorComboBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="ConnectSqlForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +93,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="VizualizerSettings.cs" />
+    <EmbeddedResource Include="ColorComboBox.resx">
+      <DependentUpon>ColorComboBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConnectSqlForm.resx">
       <DependentUpon>ConnectSqlForm.cs</DependentUpon>
     </EmbeddedResource>
