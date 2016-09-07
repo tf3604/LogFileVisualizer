@@ -50,7 +50,7 @@
             // activeVlfLabel
             // 
             this.activeVlfLabel.AutoSize = true;
-            this.activeVlfLabel.Location = new System.Drawing.Point(4, 4);
+            this.activeVlfLabel.Location = new System.Drawing.Point(4, 7);
             this.activeVlfLabel.Name = "activeVlfLabel";
             this.activeVlfLabel.Size = new System.Drawing.Size(88, 13);
             this.activeVlfLabel.TabIndex = 0;
@@ -96,11 +96,12 @@
             this.currentVlfColorComboBox.Name = "currentVlfColorComboBox";
             this.currentVlfColorComboBox.Size = new System.Drawing.Size(144, 21);
             this.currentVlfColorComboBox.TabIndex = 4;
+            this.currentVlfColorComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
             // currentVlfLabel
             // 
             this.currentVlfLabel.AutoSize = true;
-            this.currentVlfLabel.Location = new System.Drawing.Point(4, 34);
+            this.currentVlfLabel.Location = new System.Drawing.Point(4, 37);
             this.currentVlfLabel.Name = "currentVlfLabel";
             this.currentVlfLabel.Size = new System.Drawing.Size(92, 13);
             this.currentVlfLabel.TabIndex = 3;
@@ -125,11 +126,12 @@
             this.inactiveVlfColorComboBox.Name = "inactiveVlfColorComboBox";
             this.inactiveVlfColorComboBox.Size = new System.Drawing.Size(144, 21);
             this.inactiveVlfColorComboBox.TabIndex = 7;
+            this.inactiveVlfColorComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
             // inactiveVlfLabel
             // 
             this.inactiveVlfLabel.AutoSize = true;
-            this.inactiveVlfLabel.Location = new System.Drawing.Point(4, 64);
+            this.inactiveVlfLabel.Location = new System.Drawing.Point(4, 67);
             this.inactiveVlfLabel.Name = "inactiveVlfLabel";
             this.inactiveVlfLabel.Size = new System.Drawing.Size(96, 13);
             this.inactiveVlfLabel.TabIndex = 6;
@@ -138,7 +140,7 @@
             // fontNameLabel
             // 
             this.fontNameLabel.AutoSize = true;
-            this.fontNameLabel.Location = new System.Drawing.Point(4, 94);
+            this.fontNameLabel.Location = new System.Drawing.Point(4, 97);
             this.fontNameLabel.Name = "fontNameLabel";
             this.fontNameLabel.Size = new System.Drawing.Size(60, 13);
             this.fontNameLabel.TabIndex = 9;
@@ -146,16 +148,18 @@
             // 
             // fontNameComboBox
             // 
+            this.fontNameComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fontNameComboBox.FormattingEnabled = true;
             this.fontNameComboBox.Location = new System.Drawing.Point(125, 94);
             this.fontNameComboBox.Name = "fontNameComboBox";
             this.fontNameComboBox.Size = new System.Drawing.Size(225, 21);
             this.fontNameComboBox.TabIndex = 10;
+            this.fontNameComboBox.SelectedIndexChanged += new System.EventHandler(this.FontNameComboBox_SelectedIndexChanged);
             // 
             // fontSizeLabel
             // 
             this.fontSizeLabel.AutoSize = true;
-            this.fontSizeLabel.Location = new System.Drawing.Point(4, 124);
+            this.fontSizeLabel.Location = new System.Drawing.Point(4, 127);
             this.fontSizeLabel.Name = "fontSizeLabel";
             this.fontSizeLabel.Size = new System.Drawing.Size(52, 13);
             this.fontSizeLabel.TabIndex = 11;
@@ -163,6 +167,7 @@
             // 
             // fontSizeNumeric
             // 
+            this.fontSizeNumeric.DecimalPlaces = 2;
             this.fontSizeNumeric.Increment = new decimal(new int[] {
             25,
             0,
@@ -187,11 +192,12 @@
             0,
             0,
             0});
+            this.fontSizeNumeric.ValueChanged += new System.EventHandler(this.FontSizeNumeric_ValueChanged);
             // 
             // fontColorLabel
             // 
             this.fontColorLabel.AutoSize = true;
-            this.fontColorLabel.Location = new System.Drawing.Point(4, 154);
+            this.fontColorLabel.Location = new System.Drawing.Point(4, 157);
             this.fontColorLabel.Name = "fontColorLabel";
             this.fontColorLabel.Size = new System.Drawing.Size(57, 13);
             this.fontColorLabel.TabIndex = 13;
@@ -199,11 +205,14 @@
             // 
             // fontColorComboBox
             // 
+            this.fontColorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.fontColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fontColorComboBox.FormattingEnabled = true;
             this.fontColorComboBox.Location = new System.Drawing.Point(125, 154);
             this.fontColorComboBox.Name = "fontColorComboBox";
             this.fontColorComboBox.Size = new System.Drawing.Size(143, 21);
             this.fontColorComboBox.TabIndex = 14;
+            this.fontColorComboBox.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
             // fontColorCustomButton
             // 
@@ -213,6 +222,7 @@
             this.fontColorCustomButton.TabIndex = 15;
             this.fontColorCustomButton.Text = "Custom ...";
             this.fontColorCustomButton.UseVisualStyleBackColor = true;
+            this.fontColorCustomButton.Click += new System.EventHandler(this.CustomButton_Click);
             // 
             // DisplayUserControl
             // 

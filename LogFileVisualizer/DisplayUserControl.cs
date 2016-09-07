@@ -29,14 +29,16 @@ namespace LogFileVisualizer
             {
                 { activeVlfCustomButton, activeVlfColorComboBox },
                 { currentVlfCustomButton, currentVlfColorComboBox },
-                { inactiveVlfCustomButton, inactiveVlfColorComboBox }
+                { inactiveVlfCustomButton, inactiveVlfColorComboBox },
+                { fontColorCustomButton, fontColorComboBox }
             };
 
             _buttonSettingsPropertyMapping = new Dictionary<Button, string>()
             {
                 { activeVlfCustomButton, "ActiveVlfColor" },
                 { currentVlfCustomButton, "CurrentVlfColor" },
-                { inactiveVlfCustomButton, "InactiveVlfColor" }
+                { inactiveVlfCustomButton, "InactiveVlfColor" },
+                { fontColorCustomButton, "VlfFontColor" }
             };
         }
 
@@ -107,6 +109,16 @@ namespace LogFileVisualizer
 
         private void InitializeFonts()
         {
+            fontNameComboBox.Items.Clear();
+
+            string currentFont = VisualizerSettings.Clone.VlfFontName;
+            if (_knownFonts.Contains(currentFont) == false)
+            {
+                fontNameComboBox.Items.Add(currentFont);
+            }
+
+            fontNameComboBox.Items.AddRange(_knownFonts.ToArray());
+            fontNameComboBox.SelectedItem = currentFont;
         }
 
         private void LoadFontsAndColors()
@@ -129,7 +141,8 @@ namespace LogFileVisualizer
 
                 if (_knownFonts == null)
                 {
-                    _knownFonts = new List<string>();
+                    _knownFonts = FontFamily.Families.Select(f => f.Name).ToList();
+                    _knownFonts.Sort();
                 }
             }
         }
@@ -152,6 +165,22 @@ namespace LogFileVisualizer
 
                 Color newColor = (Color)box.SelectedItem;
                 cloneProperty.SetMethod.Invoke(VisualizerSettings.Clone, new object[1] { newColor });
+            }
+        }
+
+        private void FontSizeNumeric_ValueChanged(object sender, EventArgs e)
+        {
+            if (_isInitializing == false)
+            {
+                VisualizerSettings.Clone.VlfFontSize = (float)fontSizeNumeric.Value;
+            }
+        }
+
+        private void FontNameComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (_isInitializing == false)
+            {
+                VisualizerSettings.Clone.VlfFontName = fontNameComboBox.SelectedText;
             }
         }
     }
