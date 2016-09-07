@@ -62,22 +62,33 @@ namespace LogFileVisualizer
 
         private void DisplayUserControl_Load(object sender, EventArgs e)
         {
+            _isInitializing = true;
             foreach (Button button in _buttonComboBoxMapping.Keys)
             {
                 InitializeColors(button);
             }
+
+            InitializeColorComboBox(fontColorComboBox, VisualizerSettings.Clone.VlfFontColor.Value);
+            fontSizeNumeric.Value = (decimal)VisualizerSettings.Clone.VlfFontSize.Value;
+            _isInitializing = false;
         }
 
         private void InitializeColors(Button button)
         {
-            _isInitializing = true;
             ColorComboBox box = _buttonComboBoxMapping[button];
             string propertyName = _buttonSettingsPropertyMapping[button];
 
-            box.Items.Clear();
             Type settingsType = typeof(VisualizerSettings);
             PropertyInfo cloneProperty = settingsType.GetProperty(propertyName);
             Color currentValue = (Color)cloneProperty.GetMethod.Invoke(VisualizerSettings.Clone, null);
+
+            InitializeColorComboBox(box, currentValue);
+            InitializeFonts();
+        }
+
+        private void InitializeColorComboBox(ColorComboBox box, Color currentValue)
+        {
+            box.Items.Clear();
             box.Items.Add(currentValue);
 
             Type colorType = typeof(Color);
@@ -90,7 +101,10 @@ namespace LogFileVisualizer
             }
 
             box.SelectedIndex = 0;
-            _isInitializing = false;
+        }
+
+        private void InitializeFonts()
+        {
         }
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)

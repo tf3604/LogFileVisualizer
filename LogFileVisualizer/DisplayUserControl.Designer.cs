@@ -41,6 +41,9 @@
             this.fontNameComboBox = new System.Windows.Forms.ComboBox();
             this.fontSizeLabel = new System.Windows.Forms.Label();
             this.fontSizeNumeric = new System.Windows.Forms.NumericUpDown();
+            this.fontColorLabel = new System.Windows.Forms.Label();
+            this.fontColorComboBox = new System.Windows.Forms.ColorComboBox();
+            this.fontColorCustomButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.fontSizeNumeric)).BeginInit();
             this.SuspendLayout();
             // 
@@ -66,7 +69,7 @@
             // 
             // activeVlfCustomButton
             // 
-            this.activeVlfCustomButton.Location = new System.Drawing.Point(276, 1);
+            this.activeVlfCustomButton.Location = new System.Drawing.Point(276, 2);
             this.activeVlfCustomButton.Name = "activeVlfCustomButton";
             this.activeVlfCustomButton.Size = new System.Drawing.Size(75, 23);
             this.activeVlfCustomButton.TabIndex = 2;
@@ -76,7 +79,7 @@
             // 
             // currentVlfCustomButton
             // 
-            this.currentVlfCustomButton.Location = new System.Drawing.Point(276, 31);
+            this.currentVlfCustomButton.Location = new System.Drawing.Point(276, 32);
             this.currentVlfCustomButton.Name = "currentVlfCustomButton";
             this.currentVlfCustomButton.Size = new System.Drawing.Size(75, 23);
             this.currentVlfCustomButton.TabIndex = 5;
@@ -105,7 +108,7 @@
             // 
             // inactiveVlfCustomButton
             // 
-            this.inactiveVlfCustomButton.Location = new System.Drawing.Point(275, 62);
+            this.inactiveVlfCustomButton.Location = new System.Drawing.Point(276, 62);
             this.inactiveVlfCustomButton.Name = "inactiveVlfCustomButton";
             this.inactiveVlfCustomButton.Size = new System.Drawing.Size(75, 23);
             this.inactiveVlfCustomButton.TabIndex = 8;
@@ -118,7 +121,7 @@
             this.inactiveVlfColorComboBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.inactiveVlfColorComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.inactiveVlfColorComboBox.FormattingEnabled = true;
-            this.inactiveVlfColorComboBox.Location = new System.Drawing.Point(124, 65);
+            this.inactiveVlfColorComboBox.Location = new System.Drawing.Point(125, 64);
             this.inactiveVlfColorComboBox.Name = "inactiveVlfColorComboBox";
             this.inactiveVlfColorComboBox.Size = new System.Drawing.Size(144, 21);
             this.inactiveVlfColorComboBox.TabIndex = 7;
@@ -126,7 +129,7 @@
             // inactiveVlfLabel
             // 
             this.inactiveVlfLabel.AutoSize = true;
-            this.inactiveVlfLabel.Location = new System.Drawing.Point(3, 65);
+            this.inactiveVlfLabel.Location = new System.Drawing.Point(4, 64);
             this.inactiveVlfLabel.Name = "inactiveVlfLabel";
             this.inactiveVlfLabel.Size = new System.Drawing.Size(96, 13);
             this.inactiveVlfLabel.TabIndex = 6;
@@ -135,7 +138,7 @@
             // fontNameLabel
             // 
             this.fontNameLabel.AutoSize = true;
-            this.fontNameLabel.Location = new System.Drawing.Point(7, 105);
+            this.fontNameLabel.Location = new System.Drawing.Point(4, 94);
             this.fontNameLabel.Name = "fontNameLabel";
             this.fontNameLabel.Size = new System.Drawing.Size(60, 13);
             this.fontNameLabel.TabIndex = 9;
@@ -144,7 +147,7 @@
             // fontNameComboBox
             // 
             this.fontNameComboBox.FormattingEnabled = true;
-            this.fontNameComboBox.Location = new System.Drawing.Point(125, 105);
+            this.fontNameComboBox.Location = new System.Drawing.Point(125, 94);
             this.fontNameComboBox.Name = "fontNameComboBox";
             this.fontNameComboBox.Size = new System.Drawing.Size(225, 21);
             this.fontNameComboBox.TabIndex = 10;
@@ -152,7 +155,7 @@
             // fontSizeLabel
             // 
             this.fontSizeLabel.AutoSize = true;
-            this.fontSizeLabel.Location = new System.Drawing.Point(10, 147);
+            this.fontSizeLabel.Location = new System.Drawing.Point(4, 124);
             this.fontSizeLabel.Name = "fontSizeLabel";
             this.fontSizeLabel.Size = new System.Drawing.Size(52, 13);
             this.fontSizeLabel.TabIndex = 11;
@@ -165,7 +168,7 @@
             0,
             0,
             131072});
-            this.fontSizeNumeric.Location = new System.Drawing.Point(124, 147);
+            this.fontSizeNumeric.Location = new System.Drawing.Point(125, 124);
             this.fontSizeNumeric.Maximum = new decimal(new int[] {
             144,
             0,
@@ -185,10 +188,39 @@
             0,
             0});
             // 
+            // fontColorLabel
+            // 
+            this.fontColorLabel.AutoSize = true;
+            this.fontColorLabel.Location = new System.Drawing.Point(4, 154);
+            this.fontColorLabel.Name = "fontColorLabel";
+            this.fontColorLabel.Size = new System.Drawing.Size(57, 13);
+            this.fontColorLabel.TabIndex = 13;
+            this.fontColorLabel.Text = "Font color:";
+            // 
+            // fontColorComboBox
+            // 
+            this.fontColorComboBox.FormattingEnabled = true;
+            this.fontColorComboBox.Location = new System.Drawing.Point(125, 154);
+            this.fontColorComboBox.Name = "fontColorComboBox";
+            this.fontColorComboBox.Size = new System.Drawing.Size(143, 21);
+            this.fontColorComboBox.TabIndex = 14;
+            // 
+            // fontColorCustomButton
+            // 
+            this.fontColorCustomButton.Location = new System.Drawing.Point(276, 152);
+            this.fontColorCustomButton.Name = "fontColorCustomButton";
+            this.fontColorCustomButton.Size = new System.Drawing.Size(75, 23);
+            this.fontColorCustomButton.TabIndex = 15;
+            this.fontColorCustomButton.Text = "Custom ...";
+            this.fontColorCustomButton.UseVisualStyleBackColor = true;
+            // 
             // DisplayUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.fontColorCustomButton);
+            this.Controls.Add(this.fontColorComboBox);
+            this.Controls.Add(this.fontColorLabel);
             this.Controls.Add(this.fontSizeNumeric);
             this.Controls.Add(this.fontSizeLabel);
             this.Controls.Add(this.fontNameComboBox);
@@ -226,5 +258,8 @@
         private System.Windows.Forms.ComboBox fontNameComboBox;
         private System.Windows.Forms.Label fontSizeLabel;
         private System.Windows.Forms.NumericUpDown fontSizeNumeric;
+        private System.Windows.Forms.Label fontColorLabel;
+        private System.Windows.Forms.ColorComboBox fontColorComboBox;
+        private System.Windows.Forms.Button fontColorCustomButton;
     }
 }
