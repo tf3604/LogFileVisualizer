@@ -141,6 +141,7 @@
             this.Controls.Add(this.activeVlfLabel);
             this.Name = "DisplayUserControl";
             this.Size = new System.Drawing.Size(450, 285);
+            this.Load += new System.EventHandler(this.DisplayUserControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

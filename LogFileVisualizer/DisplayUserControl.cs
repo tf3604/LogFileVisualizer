@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Data;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -56,6 +57,36 @@ namespace LogFileVisualizer
                     }
                 }
             }
+        }
+
+        private void DisplayUserControl_Load(object sender, EventArgs e)
+        {
+            foreach (Button button in _buttonComboBoxMapping.Keys)
+            {
+                InitializeColors(button);
+            }
+        }
+
+        private void InitializeColors(Button button)
+        {
+            ColorComboBox box = _buttonComboBoxMapping[button];
+            string propertyName = _buttonSettingsPropertyMapping[button];
+
+            box.Items.Clear();
+            Type settingsType = typeof(VisualizerSettings);
+            PropertyInfo cloneProperty = settingsType.GetProperty(propertyName);
+            Color currentValue = (Color)cloneProperty.GetMethod.Invoke(VisualizerSettings.Clone, null);
+
+            Type colorType = typeof(Color);
+            List<PropertyInfo> colorProperties = colorType.GetProperties(BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Public).ToList();
+            colorProperties.Sort((a, b) => a.Name.CompareTo(b.Name));
+            foreach (PropertyInfo property in colorProperties)
+            {
+                Color color = (Color)property.GetMethod.Invoke(null, null);
+                box.Items.Add(color);
+            }
+
+            box.SelectedIndex = 0;
         }
     }
 }
