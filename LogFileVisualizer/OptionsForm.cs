@@ -39,7 +39,7 @@ namespace LogFileVisualizer
         {
             List<OptionsPage> pages = new List<OptionsPage>()
             {
-                //new OptionsPage("Colors and Fonts", new ColorsAndFontsUserControl())
+                new OptionsPage("Display", new DisplayUserControl())
             };
 
             this.pagesListBox.Items.Clear();
