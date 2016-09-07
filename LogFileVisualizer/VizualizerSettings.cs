@@ -119,6 +119,48 @@ namespace LogFileVisualizer
             set;
         }
 
+        [DataMember]
+        public Color? ActiveVlfColor
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public Color? CurrentVlfColor
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public Color? InactiveVlfColor
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public Color? VlfFontColor
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public string VlfFontName
+        {
+            get;
+            set;
+        }
+
+        [DataMember]
+        public float? VlfFontSize
+        {
+            get;
+            set;
+        }
+
         public void Save()
         {
             if (_userSettingsOverwriteDecline == true)
@@ -193,6 +235,30 @@ namespace LogFileVisualizer
         [OnDeserialized]
         private void PostDeserialize(StreamingContext context)
         {
+            if (ActiveVlfColor == null)
+            {
+                ActiveVlfColor = Color.Red;
+            }
+            if (CurrentVlfColor == null)
+            {
+                CurrentVlfColor = Color.Yellow;
+            }
+            if (InactiveVlfColor == null)
+            {
+                InactiveVlfColor = Color.Green;
+            }
+            if (VlfFontColor == null)
+            {
+                VlfFontColor = Color.Black;
+            }
+            if (VlfFontName == null)
+            {
+                VlfFontName = "Times New Roman";
+            }
+            if (VlfFontSize == null)
+            {
+                VlfFontSize = 10;
+            }
         }
 
         private static VisualizerSettings Load()

@@ -15,6 +15,7 @@ namespace LogFileVisualizer
     {
         private Dictionary<Button, ColorComboBox> _buttonComboBoxMapping;
         private Dictionary<Button, string> _buttonSettingsPropertyMapping;
+        private bool _isInitializing = true;
 
         public DisplayUserControl()
         {
@@ -69,6 +70,7 @@ namespace LogFileVisualizer
 
         private void InitializeColors(Button button)
         {
+            _isInitializing = true;
             ColorComboBox box = _buttonComboBoxMapping[button];
             string propertyName = _buttonSettingsPropertyMapping[button];
 
@@ -76,6 +78,7 @@ namespace LogFileVisualizer
             Type settingsType = typeof(VisualizerSettings);
             PropertyInfo cloneProperty = settingsType.GetProperty(propertyName);
             Color currentValue = (Color)cloneProperty.GetMethod.Invoke(VisualizerSettings.Clone, null);
+            box.Items.Add(currentValue);
 
             Type colorType = typeof(Color);
             List<PropertyInfo> colorProperties = colorType.GetProperties(BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.Public).ToList();
@@ -87,11 +90,28 @@ namespace LogFileVisualizer
             }
 
             box.SelectedIndex = 0;
+            _isInitializing = false;
         }
 
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (_isInitializing)
+            {
+                return;
+            }
 
+            ColorComboBox box = sender as ColorComboBox;
+            KeyValuePair<Button, ColorComboBox> mapping = _buttonComboBoxMapping.FirstOrDefault(b => b.Value == box);
+            if (mapping.Value == box)
+            {
+                Button button = mapping.Key;
+                string propertyName = _buttonSettingsPropertyMapping[button];
+                Type settingsType = typeof(VisualizerSettings);
+                PropertyInfo cloneProperty = settingsType.GetProperty(propertyName);
+
+                Color newColor = (Color)box.SelectedItem;
+                cloneProperty.SetMethod.Invoke(VisualizerSettings.Clone, new object[1] { newColor });
+            }
         }
     }
 }
