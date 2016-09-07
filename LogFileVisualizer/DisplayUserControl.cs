@@ -78,6 +78,7 @@ namespace LogFileVisualizer
 
             InitializeColorComboBox(fontColorComboBox, VisualizerSettings.Clone.VlfFontColor.Value);
             fontSizeNumeric.Value = (decimal)VisualizerSettings.Clone.VlfFontSize.Value;
+            InitializeFonts();
             _isInitializing = false;
         }
 
@@ -91,7 +92,6 @@ namespace LogFileVisualizer
             Color currentValue = (Color)cloneProperty.GetMethod.Invoke(VisualizerSettings.Clone, null);
 
             InitializeColorComboBox(box, currentValue);
-            InitializeFonts();
         }
 
         private void InitializeColorComboBox(ColorComboBox box, Color currentValue)
@@ -180,7 +180,7 @@ namespace LogFileVisualizer
         {
             if (_isInitializing == false)
             {
-                VisualizerSettings.Clone.VlfFontName = fontNameComboBox.SelectedText;
+                VisualizerSettings.Clone.VlfFontName = fontNameComboBox.Text;
             }
         }
     }

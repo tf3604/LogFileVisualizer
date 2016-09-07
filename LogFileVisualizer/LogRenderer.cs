@@ -43,7 +43,24 @@ namespace LogFileVisualizer
         public static void Render(LogStatsDal dal, LiveViewOptions options)
         {
             Initialize();
-            List<DbccLogInfoItem> vlfs = dal.ReadDbccLogInfo(null, true);
+
+            List<DbccLogInfoItem> vlfs;
+            try
+            {
+                vlfs = dal.ReadDbccLogInfo(null, true);
+            }
+            catch (Exception ex)
+            {
+                try
+                {
+                    RenderException(options, ex);
+                }
+                catch
+                {
+                    // Intentionally swallow any exceptions.
+                }
+                return;
+            }
 
             using (Bitmap bitmap = CreateImage(vlfs, options))
             {
@@ -64,13 +81,47 @@ namespace LogFileVisualizer
 
             string statusMessage = $"Instance: {dal.InstanceName}; Database: {dal.DatabaseName}; Recovery mode: {dbInfo.RecoveryModelDescription}; Log size: {displaySize}; VLFs: {vlfs.Count}; Wait: {dbInfo.LogReuseWaitDescription}; Last refresh: {DateTime.Now:HH:mm:ss}";
 
-            if (options.StatusLabel.GetCurrentParent().InvokeRequired)
+            ToolStrip toolStrip = options.StatusLabel.GetCurrentParent();
+            if (toolStrip != null)
             {
-                options.StatusLabel.GetCurrentParent().Invoke(new Action<LiveViewOptions, string>(SetStatus), options, statusMessage);
+                if (toolStrip.InvokeRequired)
+                {
+                    toolStrip.Invoke(new Action<LiveViewOptions, string>(SetStatus), options, statusMessage);
+                }
+                else
+                {
+                    SetStatus(options, statusMessage);
+                }
             }
-            else
+        }
+
+        public static void RenderException(LiveViewOptions options, Exception ex)
+        {
+            using (Bitmap bitmap = new Bitmap(options.DisplaySurface.Width, options.DisplaySurface.Height))
             {
-                SetStatus(options, statusMessage);
+                using (Graphics graphics = Graphics.FromImage(bitmap))
+                {
+                    graphics.FillRectangle(Brushes.White, 0, 0, options.DisplaySurface.Width, options.DisplaySurface.Height);
+                    string message = ex.Message;
+                    Font font = new Font("Times New Roman", 10);
+
+                    SizeF size = graphics.MeasureString(message, font);
+                    RectangleF rectangle = new RectangleF(
+                        (options.DisplaySurface.Width - size.Width) / 2,
+                        (options.DisplaySurface.Height - size.Height) / 2,
+                        size.Width,
+                        size.Height);
+                    graphics.DrawString(message, font, Brushes.Black, rectangle);
+                }
+
+                if (options.DisplaySurface.InvokeRequired)
+                {
+                    options.DisplaySurface.Invoke(new Action<LiveViewOptions, Bitmap>(SetImage), options, bitmap);
+                }
+                else
+                {
+                    SetImage(options, bitmap);
+                }
             }
         }
 
