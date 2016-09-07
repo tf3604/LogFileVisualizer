@@ -29,13 +29,13 @@
         private void InitializeComponent()
         {
             this.activeVlfLabel = new System.Windows.Forms.Label();
-            this.activeVlfColorComboBox = new System.Windows.Forms.ComboBox();
+            this.activeVlfColorComboBox = new System.Windows.Forms.ColorComboBox();
             this.activeVlfCustomButton = new System.Windows.Forms.Button();
             this.currentVlfCustomButton = new System.Windows.Forms.Button();
-            this.currentVlfColorComboBox = new System.Windows.Forms.ComboBox();
+            this.currentVlfColorComboBox = new System.Windows.Forms.ColorComboBox();
             this.currentVlfLabel = new System.Windows.Forms.Label();
             this.inactiveVlfCustomButton = new System.Windows.Forms.Button();
-            this.inactiveVlfColorComboBox = new System.Windows.Forms.ComboBox();
+            this.inactiveVlfColorComboBox = new System.Windows.Forms.ColorComboBox();
             this.inactiveVlfLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -151,13 +151,13 @@
         #endregion
 
         private System.Windows.Forms.Label activeVlfLabel;
-        private System.Windows.Forms.ComboBox activeVlfColorComboBox;
+        private System.Windows.Forms.ColorComboBox activeVlfColorComboBox;
         private System.Windows.Forms.Button activeVlfCustomButton;
         private System.Windows.Forms.Button currentVlfCustomButton;
-        private System.Windows.Forms.ComboBox currentVlfColorComboBox;
+        private System.Windows.Forms.ColorComboBox currentVlfColorComboBox;
         private System.Windows.Forms.Label currentVlfLabel;
         private System.Windows.Forms.Button inactiveVlfCustomButton;
-        private System.Windows.Forms.ComboBox inactiveVlfColorComboBox;
+        private System.Windows.Forms.ColorComboBox inactiveVlfColorComboBox;
         private System.Windows.Forms.Label inactiveVlfLabel;
     }
 }
