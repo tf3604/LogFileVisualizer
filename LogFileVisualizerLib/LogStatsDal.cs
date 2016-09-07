@@ -91,21 +91,16 @@ namespace LogFileVisualizerLib
             }
         }
 
-        public DatabaseInfo GetCurrentDatabaseInfo()
+        public string GetCurrentDatabaseRecoveryModel()
         {
-            string sql = @"select db.recovery_model_desc, db.log_reuse_wait_desc from sys.databases db where db.database_id = db_id();";
+            string sql = @"select db.recovery_model_desc from sys.databases db where db.database_id = db_id();";
             using (DataTable table = ExecuteSqlOneResultset(sql))
             {
                 if (table.Rows.Count < 1)
                 {
                     return null;
                 }
-
-                DatabaseInfo dbInfo = new DatabaseInfo();
-                dbInfo.RecoveryModelDescription = table.Rows[0]["recovery_model_desc"] as string;
-                dbInfo.LogReuseWaitDescription = table.Rows[0]["log_reuse_wait_desc"] as string;
-
-                return dbInfo;
+                return table.Rows[0]["recovery_model_desc"] as string;
             }
         }
     }

@@ -37,11 +37,7 @@
             this.stopButton = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.displayPictureBox = new System.Windows.Forms.PictureBox();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainMenu.SuspendLayout();
-            this.statusStrip.SuspendLayout();
             this.primaryToolStrip.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.displayPictureBox)).BeginInit();
@@ -50,8 +46,7 @@
             // mainMenu
             // 
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileMenu,
-            this.toolsToolStripMenuItem});
+            this.fileMenu});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
             this.mainMenu.Size = new System.Drawing.Size(787, 24);
@@ -69,15 +64,12 @@
             // liveViewMenuItem
             // 
             this.liveViewMenuItem.Name = "liveViewMenuItem";
-            this.liveViewMenuItem.Size = new System.Drawing.Size(123, 22);
+            this.liveViewMenuItem.Size = new System.Drawing.Size(152, 22);
             this.liveViewMenuItem.Text = "&Live View";
             this.liveViewMenuItem.Click += new System.EventHandler(this.LiveViewMenuItem_Click);
             // 
             // statusStrip
             // 
-            this.statusStrip.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.statusStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.statusLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 411);
             this.statusStrip.Name = "statusStrip";
             this.statusStrip.Size = new System.Drawing.Size(787, 22);
@@ -127,26 +119,6 @@
             this.displayPictureBox.TabIndex = 0;
             this.displayPictureBox.TabStop = false;
             // 
-            // statusLabel
-            // 
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(0, 17);
-            // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.optionsToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
-            this.toolsToolStripMenuItem.Text = "&Tools";
-            // 
-            // optionsToolStripMenuItem
-            // 
-            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
-            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.optionsToolStripMenuItem.Text = "&Options";
-            this.optionsToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
-            // 
             // VisualizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -161,8 +133,6 @@
             this.Text = "SQL Server Log File Visualizer";
             this.mainMenu.ResumeLayout(false);
             this.mainMenu.PerformLayout();
-            this.statusStrip.ResumeLayout(false);
-            this.statusStrip.PerformLayout();
             this.primaryToolStrip.ResumeLayout(false);
             this.primaryToolStrip.PerformLayout();
             this.panel1.ResumeLayout(false);
@@ -182,9 +152,6 @@
         private System.Windows.Forms.PictureBox displayPictureBox;
         private System.Windows.Forms.ToolStripMenuItem liveViewMenuItem;
         private System.Windows.Forms.ToolStripButton stopButton;
-        private System.Windows.Forms.ToolStripStatusLabel statusLabel;
-        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
     }
 }
 

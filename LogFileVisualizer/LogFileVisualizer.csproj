@@ -51,9 +51,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ColorComboBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="ConnectSqlForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -75,12 +72,6 @@
     </Compile>
     <Compile Include="LiveViewVisualizer.cs" />
     <Compile Include="LogRenderer.cs" />
-    <Compile Include="OptionsForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="OptionsForm.designer.cs">
-      <DependentUpon>OptionsForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="VisualizerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -98,9 +89,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="LiveViewOptionsForm.resx">
       <DependentUpon>LiveViewOptionsForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="OptionsForm.resx">
-      <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="VisualizerForm.resx">
       <DependentUpon>VisualizerForm.cs</DependentUpon>

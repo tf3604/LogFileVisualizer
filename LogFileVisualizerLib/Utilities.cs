@@ -78,54 +78,5 @@ namespace LogFileVisualizerLib
                 return clone;
             }
         }
-
-        public static string FriendlySize(long byteCount)
-        {
-            double kb = 1024.0;
-            double bytes = byteCount;
-            string suffix = "B";
-
-            if (bytes > kb)
-            {
-                bytes /= kb;
-                suffix = "KB";
-            }
-
-            if (bytes > kb)
-            {
-                bytes /= kb;
-                suffix = "MB";
-            }
-
-            if (bytes > kb)
-            {
-                bytes /= kb;
-                suffix = "GB";
-            }
-
-            if (bytes > kb)
-            {
-                bytes /= kb;
-                suffix = "TB";
-            }
-
-            string pattern;
-            if (bytes >= 100.0)
-            {
-                pattern = "###";
-            }
-            else if (bytes > 10.0)
-            {
-                pattern = "##.#";
-            }
-            else
-            {
-                pattern = "0.##";
-            }
-
-            string format = string.Format(@"{{0:{0}}}{{1}}", pattern);
-            string friendlySize = string.Format(format, bytes, suffix);
-            return friendlySize;
-        }
     }
 }
