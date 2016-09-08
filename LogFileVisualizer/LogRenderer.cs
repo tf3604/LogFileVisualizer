@@ -79,7 +79,7 @@ namespace LogFileVisualizer
 
             DatabaseInfo dbInfo = dal.GetCurrentDatabaseInfo();
 
-            string statusMessage = $"Instance: {dal.InstanceName}; Database: {dal.DatabaseName}; Recovery mode: {dbInfo.RecoveryModelDescription}; Log size: {displaySize}; VLFs: {vlfs.Count}; Wait: {dbInfo.LogReuseWaitDescription}; Last refresh: {DateTime.Now:HH:mm:ss}";
+            string statusMessage = $"Instance: {dal.InstanceName}; Database: {dal.DatabaseName}; Recovery model: {dbInfo.RecoveryModelDescription}; Log size: {displaySize}; VLFs: {vlfs.Count}; Wait: {dbInfo.LogReuseWaitDescription}; Last refresh: {DateTime.Now:HH:mm:ss}";
 
             ToolStrip toolStrip = options.StatusLabel.GetCurrentParent();
             if (toolStrip != null)
