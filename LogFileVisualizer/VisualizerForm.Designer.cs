@@ -35,11 +35,11 @@
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.primaryToolStrip = new System.Windows.Forms.ToolStrip();
             this.stopButton = new System.Windows.Forms.ToolStripButton();
             this.panel1 = new System.Windows.Forms.Panel();
             this.displayPictureBox = new System.Windows.Forms.PictureBox();
-            this.statusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.mainMenu.SuspendLayout();
             this.statusStrip.SuspendLayout();
             this.primaryToolStrip.SuspendLayout();
@@ -99,6 +99,11 @@
             this.statusStrip.TabIndex = 1;
             this.statusStrip.Text = "statusStrip1";
             // 
+            // statusLabel
+            // 
+            this.statusLabel.Name = "statusLabel";
+            this.statusLabel.Size = new System.Drawing.Size(0, 17);
+            // 
             // primaryToolStrip
             // 
             this.primaryToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -142,11 +147,6 @@
             this.displayPictureBox.TabIndex = 0;
             this.displayPictureBox.TabStop = false;
             // 
-            // statusLabel
-            // 
-            this.statusLabel.Name = "statusLabel";
-            this.statusLabel.Size = new System.Drawing.Size(0, 17);
-            // 
             // VisualizerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,6 +156,7 @@
             this.Controls.Add(this.primaryToolStrip);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.mainMenu);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.mainMenu;
             this.Name = "VisualizerForm";
             this.Text = "SQL Server Log File Visualizer";

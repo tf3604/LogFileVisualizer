@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LsnConverterForm));
             this.decimalLabel = new System.Windows.Forms.Label();
             this.decimalTextBox = new System.Windows.Forms.TextBox();
             this.hexadecimalSeparatedTextBox = new System.Windows.Forms.TextBox();
@@ -152,6 +153,7 @@
             this.Controls.Add(this.hexadecimalSeparatedLabel);
             this.Controls.Add(this.decimalTextBox);
             this.Controls.Add(this.decimalLabel);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "LsnConverterForm";
