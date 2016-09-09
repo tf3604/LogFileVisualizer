@@ -93,5 +93,32 @@ namespace LogFileVisualizer
                 form.ShowDialog();
             }
         }
+
+        private void AboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (AboutForm form = new AboutForm())
+            {
+                form.ShowDialog();
+            }
+        }
+
+        private void VisualizerForm_Load(object sender, EventArgs e)
+        {
+            if (VisualizerSettings.Instance.UserAgreesToDisclaimer == false)
+            {
+                using (DisclaimerForm disclaimer = new DisclaimerForm())
+                {
+                    if (disclaimer.ShowDialog() == DialogResult.Cancel)
+                    {
+                        this.Close();
+                    }
+                    else
+                    {
+                        VisualizerSettings.Instance.UserAgreesToDisclaimer = true;
+                        VisualizerSettings.Instance.Save();
+                    }
+                }
+            }
+        }
     }
 }
