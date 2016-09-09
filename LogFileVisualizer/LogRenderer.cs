@@ -137,7 +137,10 @@ namespace LogFileVisualizer
 
         private static Bitmap CreateImage(List<DbccLogInfoItem> vlfs, LiveViewOptions options)
         {
-            Bitmap bitmap = new Bitmap(options.DisplaySurface.Width, options.DisplaySurface.Height);
+            int width = Math.Max(options.DisplaySurface.Width, 1);
+            int height = Math.Max(options.DisplaySurface.Height, 1);
+
+            Bitmap bitmap = new Bitmap(width, height);
 
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
