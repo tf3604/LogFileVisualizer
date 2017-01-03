@@ -10,7 +10,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("tf3604.com")]
 [assembly: AssemblyProduct("LogFileVisualizerLib")]
-[assembly: AssemblyCopyright("Copyright © Brian Hansen 2016")]
+[assembly: AssemblyCopyright("Copyright © Brian Hansen 2016-2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
