@@ -34,6 +34,10 @@
             this.liveViewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.physicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.logicalToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
@@ -54,6 +58,7 @@
             this.mainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileMenu,
             this.toolsToolStripMenuItem,
+            this.viewToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.mainMenu.Location = new System.Drawing.Point(0, 0);
             this.mainMenu.Name = "mainMenu";
@@ -91,6 +96,39 @@
             this.optionsToolStripMenuItem.Text = "&Options";
             this.optionsToolStripMenuItem.Click += new System.EventHandler(this.OptionsToolStripMenuItem_Click);
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.viewTypeToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.viewToolStripMenuItem.Text = "&View";
+            // 
+            // viewTypeToolStripMenuItem
+            // 
+            this.viewTypeToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.physicalToolStripMenuItem,
+            this.logicalToolStripMenuItem});
+            this.viewTypeToolStripMenuItem.Name = "viewTypeToolStripMenuItem";
+            this.viewTypeToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.viewTypeToolStripMenuItem.Text = "&View type";
+            // 
+            // physicalToolStripMenuItem
+            // 
+            this.physicalToolStripMenuItem.Checked = true;
+            this.physicalToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.physicalToolStripMenuItem.Name = "physicalToolStripMenuItem";
+            this.physicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.physicalToolStripMenuItem.Text = "&Physical";
+            this.physicalToolStripMenuItem.Click += new System.EventHandler(this.PhysicalToolStripMenuItem_Click);
+            // 
+            // logicalToolStripMenuItem
+            // 
+            this.logicalToolStripMenuItem.Name = "logicalToolStripMenuItem";
+            this.logicalToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.logicalToolStripMenuItem.Text = "&Logical";
+            this.logicalToolStripMenuItem.Click += new System.EventHandler(this.LogicalToolStripMenuItem_Click);
+            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -102,7 +140,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.aboutToolStripMenuItem.Text = "&About";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.AboutToolStripMenuItem_Click);
             // 
@@ -207,6 +245,10 @@
         private System.Windows.Forms.ToolStripStatusLabel statusLabel;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewTypeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem physicalToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem logicalToolStripMenuItem;
     }
 }
 

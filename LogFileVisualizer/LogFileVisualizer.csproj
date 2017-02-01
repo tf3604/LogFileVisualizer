@@ -104,6 +104,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LogViewVisualizerResources.resx</DependentUpon>
     </Compile>
+    <Compile Include="LayoutStyle.cs" />
     <Compile Include="VisualizerForm.cs">
       <SubType>Form</SubType>
     </Compile>

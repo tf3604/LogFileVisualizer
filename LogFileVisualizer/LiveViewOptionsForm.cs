@@ -59,14 +59,6 @@ namespace LogFileVisualizer
         {
             SetConnectionInfo();
             refreshIntervalSeconds.Value = _options.RefreshIntervalSeconds;
-            if (_options.Layout == LiveViewOptions.LayoutStyle.Physical)
-            {
-                physicalLayoutRadioButton.Checked = true;
-            }
-            else
-            {
-                logicalLayoutRadioButton.Checked = true;
-            }
             showVlfNumberCheckBox.Checked = _options.ShowVlfNumbers;
         }
 
@@ -98,7 +90,6 @@ namespace LogFileVisualizer
             _options.InstanceName = connectToTextBox.Text;
             _options.DatabaseName = databaseTextBox.Text;
             _options.RefreshIntervalSeconds = (int)refreshIntervalSeconds.Value;
-            _options.Layout = physicalLayoutRadioButton.Checked ? LiveViewOptions.LayoutStyle.Physical : LiveViewOptions.LayoutStyle.Logical;
             _options.ShowVlfNumbers = showVlfNumberCheckBox.Checked;
 
             VisualizerSettings.Instance.LiveViewOptions = _options;

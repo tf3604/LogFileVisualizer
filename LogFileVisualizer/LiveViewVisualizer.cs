@@ -27,10 +27,11 @@ namespace LogFileVisualizer
     internal class LiveViewVisualizer : IDisposable
     {
         private LiveViewOptions _options;
+        private LayoutStyle _layoutStyle;
         private bool _isCancelled;
         private LogStatsDal _dal;
 
-        public LiveViewVisualizer(LiveViewOptions options)
+        public LiveViewVisualizer(LiveViewOptions options, LayoutStyle layoutStyle)
         {
             if (options == null)
             {
@@ -38,6 +39,7 @@ namespace LogFileVisualizer
             }
 
             _options = options;
+            _layoutStyle = layoutStyle;
             _isCancelled = false;
             _dal = new LogStatsDal(options.Connection);
         }
@@ -49,7 +51,7 @@ namespace LogFileVisualizer
 
             do
             {
-                LogRenderer.Render(_dal, _options);
+                LogRenderer.Render(_dal, _options, _layoutStyle);
                 startTime = DateTime.Now;
                 nextRefreshTime = startTime.AddSeconds(_options.RefreshIntervalSeconds);
                 do
@@ -60,6 +62,18 @@ namespace LogFileVisualizer
                     DateTime.Now < nextRefreshTime);
             }
             while (_isCancelled == false);
+        }
+
+        public LayoutStyle LayoutStyle
+        {
+            get
+            {
+                return _layoutStyle;
+            }
+            set
+            {
+                _layoutStyle = value;
+            }
         }
 
         public void Cancel()

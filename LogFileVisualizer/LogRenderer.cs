@@ -40,7 +40,7 @@ namespace LogFileVisualizer
         private static Brush _inactiveVlfBrush;
         private static Brush _vlfFontBrush;
 
-        public static void Render(LogStatsDal dal, LiveViewOptions options)
+        public static void Render(LogStatsDal dal, LiveViewOptions options, LayoutStyle layoutStyle)
         {
             Initialize();
 
@@ -62,7 +62,7 @@ namespace LogFileVisualizer
                 return;
             }
 
-            using (Bitmap bitmap = CreateImage(vlfs, options))
+            using (Bitmap bitmap = CreateImage(vlfs, options, layoutStyle))
             {
                 if (options.DisplaySurface.InvokeRequired)
                 {
@@ -135,12 +135,19 @@ namespace LogFileVisualizer
             options.StatusLabel.Text = message;
         }
 
-        private static Bitmap CreateImage(List<DbccLogInfoItem> vlfs, LiveViewOptions options)
+        private static Bitmap CreateImage(List<DbccLogInfoItem> vlfs, LiveViewOptions options, LayoutStyle layoutStyle)
         {
             int width = Math.Max(options.DisplaySurface.Width, 1);
             int height = Math.Max(options.DisplaySurface.Height, 1);
 
             Bitmap bitmap = new Bitmap(width, height);
+
+            if (layoutStyle == LayoutStyle.Logical)
+            {
+                // If logical style is requested, make a copy of the VLF list and sort by the VLF number.
+                vlfs = new List<DbccLogInfoItem>(vlfs);
+                vlfs.Sort(new VlfComparer());
+            }
 
             using (Graphics graphics = Graphics.FromImage(bitmap))
             {
@@ -230,6 +237,24 @@ namespace LogFileVisualizer
             _currentVlfBrush = new SolidBrush(VisualizerSettings.Instance.CurrentVlfColor.Value);
             _inactiveVlfBrush = new SolidBrush(VisualizerSettings.Instance.InactiveVlfColor.Value);
             _vlfFontBrush = new SolidBrush(VisualizerSettings.Instance.VlfFontColor.Value);
+        }
+
+        private class VlfComparer : IComparer<DbccLogInfoItem>
+        {
+            public int Compare(DbccLogInfoItem x, DbccLogInfoItem y)
+            {
+                if (x.VirtualLogFileNumber == 0 && y.VirtualLogFileNumber != 0)
+                {
+                    return 1;
+                }
+
+                if (x.VirtualLogFileNumber != 0 && y.VirtualLogFileNumber == 0)
+                {
+                    return -1;
+                }
+
+                return x.VirtualLogFileNumber.CompareTo(y.VirtualLogFileNumber);
+            }
         }
     }
 }

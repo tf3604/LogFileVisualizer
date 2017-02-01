@@ -32,6 +32,7 @@ namespace LogFileVisualizer
     {
         private ApplicationSqlConnection _connection = null;
         private DisplayMode _displayMode = DisplayMode.NotSet;
+        private LayoutStyle _currentLayoutStyle = LayoutStyle.Physical;
 
         private LiveViewVisualizer _liveViewVisualizer = null;
 
@@ -52,7 +53,7 @@ namespace LogFileVisualizer
 
                     InitializeDisplay();
 
-                    _liveViewVisualizer = new LiveViewVisualizer(VisualizerSettings.Instance.LiveViewOptions);
+                    _liveViewVisualizer = new LiveViewVisualizer(VisualizerSettings.Instance.LiveViewOptions, _currentLayoutStyle);
 
                     Thread liveViewThread = new Thread(_liveViewVisualizer.Start);
                     liveViewThread.IsBackground = true;
@@ -118,6 +119,30 @@ namespace LogFileVisualizer
                         VisualizerSettings.Instance.Save();
                     }
                 }
+            }
+        }
+
+        private void PhysicalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _currentLayoutStyle = LayoutStyle.Physical;
+            physicalToolStripMenuItem.Checked = true;
+            logicalToolStripMenuItem.Checked = false;
+
+            if (_liveViewVisualizer != null)
+            {
+                _liveViewVisualizer.LayoutStyle = _currentLayoutStyle;
+            }
+        }
+
+        private void LogicalToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _currentLayoutStyle = LayoutStyle.Logical;
+            physicalToolStripMenuItem.Checked = false;
+            logicalToolStripMenuItem.Checked = true;
+
+            if (_liveViewVisualizer != null)
+            {
+                _liveViewVisualizer.LayoutStyle = _currentLayoutStyle;
             }
         }
     }

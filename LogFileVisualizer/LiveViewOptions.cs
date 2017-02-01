@@ -62,13 +62,6 @@ namespace LogFileVisualizer
         }
 
         [DataMember]
-        public LayoutStyle Layout
-        {
-            get;
-            set;
-        }
-
-        [DataMember]
         public bool ShowVlfNumbers
         {
             get;
@@ -100,16 +93,6 @@ namespace LogFileVisualizer
                     Connection = new ApplicationSqlConnection(value);
                 }
             }
-        }
-
-        [DataContract]
-        public enum LayoutStyle
-        {
-            [EnumMember]
-            Physical,
-
-            [EnumMember]
-            Logical
         }
     }
 }
