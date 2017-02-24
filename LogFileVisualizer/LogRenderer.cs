@@ -102,16 +102,25 @@ namespace LogFileVisualizer
                 using (Graphics graphics = Graphics.FromImage(bitmap))
                 {
                     graphics.FillRectangle(Brushes.White, 0, 0, options.DisplaySurface.Width, options.DisplaySurface.Height);
-                    string message = ex.Message;
+                    string fullMessage = ex.Message;
                     Font font = new Font("Times New Roman", 10);
 
-                    SizeF size = graphics.MeasureString(message, font);
-                    RectangleF rectangle = new RectangleF(
-                        (options.DisplaySurface.Width - size.Width) / 2,
-                        (options.DisplaySurface.Height - size.Height) / 2,
-                        size.Width,
-                        size.Height);
-                    graphics.DrawString(message, font, Brushes.Black, rectangle);
+                    List<MessageInfo> messages = SplitMessageToFitWindow(fullMessage, font, graphics, options.DisplaySurface.Width);
+                    float totalHeight = messages.Sum(m => m.Height);
+                    float top = (options.DisplaySurface.Height - totalHeight) / 2;
+
+                    foreach (MessageInfo messageInfo in messages)
+                    {
+                        SizeF size = graphics.MeasureString(messageInfo.Message, font);
+                        RectangleF rectangle = new RectangleF(
+                            (options.DisplaySurface.Width - size.Width) / 2,
+                            top,
+                            size.Width,
+                            size.Height);
+                        graphics.DrawString(messageInfo.Message, font, Brushes.Black, rectangle);
+
+                        top += messageInfo.Height;
+                    }
                 }
 
                 if (options.DisplaySurface.InvokeRequired)
@@ -123,6 +132,119 @@ namespace LogFileVisualizer
                     SetImage(options, bitmap);
                 }
             }
+        }
+
+        private static List<MessageInfo> SplitMessageToFitWindow(string message, Font font, Graphics graphics, int maxWidth)
+        {
+            string space = @" ";
+            SizeF spaceSize = graphics.MeasureString(space, font);
+
+            List<WordInfo> words = GetWords(message, space);
+            foreach (WordInfo word in words)
+            {
+                word.Size = graphics.MeasureString(word.Word, font);
+            }
+
+            float currentWidth = 0;
+            float maxHeight = 0;
+            bool isFirstOnLine = true;
+            StringBuilder sb = new StringBuilder();
+            List<MessageInfo> messages = new List<MessageInfo>();
+
+            for (int idx = 0; idx < words.Count; idx++)
+            {
+                WordInfo word = words[idx];
+                float wordWidth = (isFirstOnLine ? 0 : word.DelimitersPreceeding * spaceSize.Width) + word.Size.Width;
+                if (currentWidth + wordWidth < maxWidth ||
+                    isFirstOnLine)
+                {
+                    if (isFirstOnLine == false)
+                    {
+                        for (int i = 0; i < words[idx].DelimitersPreceeding; i++)
+                        {
+                            sb.Append(space);
+                        }
+                    }
+                    isFirstOnLine = false;
+                    currentWidth += wordWidth;
+                }
+                else
+                {
+                    if (sb.Length > 0)
+                    {
+                        MessageInfo messageInfo = new MessageInfo();
+                        messageInfo.Message = sb.ToString();
+                        messageInfo.Height = maxHeight;
+                        messages.Add(messageInfo);
+                    }
+                    currentWidth = 0;
+                    maxHeight = 0;
+                    sb.Clear();
+                }
+
+                sb.Append(word.Word);
+                maxHeight = Math.Max(maxHeight, word.Size.Height);
+            }
+
+            if (sb.Length > 0)
+            {
+                MessageInfo messageInfo = new MessageInfo();
+                messageInfo.Message = sb.ToString();
+                messageInfo.Height = maxHeight;
+                messages.Add(messageInfo);
+            }
+
+            return messages;
+        }
+
+        private static List<WordInfo> GetWords(string message, string delimiter)
+        {
+            List<WordInfo> words = new List<WordInfo>();
+            int delimiterCount = 0;
+            int startIndex = 0;
+            StringBuilder sb = new StringBuilder();
+
+            for (int idx = 0; idx <= message.Length - delimiter.Length; idx++)
+            {
+                char c = message[idx];
+                if (message.Substring(idx, delimiter.Length) == delimiter)
+                {
+                    if (sb.Length > 0)
+                    {
+                        WordInfo word = new WordInfo();
+                        word.Word = sb.ToString();
+                        word.DelimitersPreceeding = delimiterCount;
+                        word.StartIndex = startIndex;
+
+                        words.Add(word);
+
+                        delimiterCount = 0;
+                        idx += delimiter.Length - 1;
+                        sb.Clear();
+                    }
+                    delimiterCount++;
+                }
+                else
+                {
+                    if (sb.Length == 0)
+                    {
+                        startIndex = idx;
+                    }
+                    sb.Append(c);
+                }
+            }
+
+            if (sb.Length > 0)
+            {
+                WordInfo word = new WordInfo();
+                word.Word = sb.ToString();
+                word.DelimitersPreceeding = delimiterCount;
+                word.StartIndex = startIndex;
+
+                words.Add(word);
+            }
+
+            return words;
         }
 
         private static void SetImage(LiveViewOptions options, Bitmap bitmap)
@@ -255,6 +377,24 @@ namespace LogFileVisualizer
 
                 return x.VirtualLogFileNumber.CompareTo(y.VirtualLogFileNumber);
             }
+        }
+
+        private class WordInfo
+        {
+            public string Word { get; set; }
+
+            public int StartIndex { get; set; }
+
+            public SizeF Size { get; set; }
+
+            public int DelimitersPreceeding { get; set; }
+        }
+
+        private class MessageInfo
+        {
+            public string Message { get; set; }
+
+            public float Height { get; set; }
         }
     }
 }
