@@ -49,6 +49,12 @@ namespace LogFileVisualizer
                 {
                     VisualizerSettings.Instance.LiveViewOptions.DisplaySurface = displayPictureBox;
                     VisualizerSettings.Instance.LiveViewOptions.StatusLabel = statusLabel;
+                    VisualizerSettings.Instance.LiveViewOptions.ForceDbccLoginfo = false;
+                    if (VisualizerSettings.Instance.AlwaysUseDbccLoginfo != null)
+                    {
+                        VisualizerSettings.Instance.LiveViewOptions.ForceDbccLoginfo = VisualizerSettings.Instance.AlwaysUseDbccLoginfo.Value;
+                    }
+
                     _displayMode = DisplayMode.LiveView;
 
                     InitializeDisplay();

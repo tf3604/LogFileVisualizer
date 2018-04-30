@@ -161,6 +161,13 @@ namespace LogFileVisualizer
             set;
         }
 
+        [DataMember]
+        public bool? AlwaysUseDbccLoginfo
+        {
+            get;
+            set;
+        }
+
         public void Save()
         {
             if (_userSettingsOverwriteDecline == true)
@@ -258,6 +265,10 @@ namespace LogFileVisualizer
             if (VlfFontSize == null)
             {
                 VlfFontSize = 10;
+            }
+            if (AlwaysUseDbccLoginfo == null)
+            {
+                AlwaysUseDbccLoginfo = false;
             }
         }
 

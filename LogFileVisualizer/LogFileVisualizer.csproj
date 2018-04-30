@@ -72,6 +72,12 @@
     <Compile Include="ConnectSqlForm.designer.cs">
       <DependentUpon>ConnectSqlForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataCollectionUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="DataCollectionUserControl.Designer.cs">
+      <DependentUpon>DataCollectionUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="DisclaimerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -122,6 +128,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ConnectSqlForm.resx">
       <DependentUpon>ConnectSqlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataCollectionUserControl.resx">
+      <DependentUpon>DataCollectionUserControl.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="DisclaimerForm.resx">
       <DependentUpon>DisclaimerForm.cs</DependentUpon>

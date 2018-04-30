@@ -40,6 +40,7 @@ namespace LogFileVisualizer
             List<OptionsPage> pages = new List<OptionsPage>()
             {
                 new OptionsPage("Display", new DisplayUserControl()),
+                new OptionsPage("Data Collection", new DataCollectionUserControl())
             };
 
             this.pagesListBox.Items.Clear();

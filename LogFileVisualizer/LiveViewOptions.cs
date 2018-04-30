@@ -80,6 +80,12 @@ namespace LogFileVisualizer
             set;
         }
 
+        public bool ForceDbccLoginfo
+        {
+            get;
+            set;
+        }
+
         private string _connectionString
         {
             get

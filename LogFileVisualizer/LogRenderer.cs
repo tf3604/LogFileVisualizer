@@ -47,7 +47,7 @@ namespace LogFileVisualizer
             List<DbccLogInfoItem> vlfs;
             try
             {
-                vlfs = dal.ReadDbccLogInfo(null, true);
+                vlfs = dal.ReadDbccLogInfo(null, true, options.ForceDbccLoginfo);
             }
             catch (Exception ex)
             {

@@ -26,31 +26,57 @@ namespace LogFileVisualizerLib
 {
     public class LogStatsDal : DalBase
     {
+        private Version _sqlVersion;
+        private static Version _minDmvLogInfoVersion = new Version("13.0.5026.0");
+
         public LogStatsDal(string instanceName, string databaseName)
             : base(instanceName, databaseName)
         {
+            GetVersion();
         }
 
         public LogStatsDal(ApplicationSqlConnection connection)
             : base(connection)
         {
+            GetVersion();
         }
 
-        public List<DbccLogInfoItem> ReadDbccLogInfo(LogSequenceNumber lastKnownLsn, bool useLiteVersion = false)
+        public List<DbccLogInfoItem> ReadDbccLogInfo(LogSequenceNumber lastKnownLsn, bool useLiteVersion = false, bool forceDbccLoginfo = false)
         {
             string sql;
-            SqlParameter[] parameters;
+            SqlParameter[] parameters = null;
 
-            if (useLiteVersion)
+            if (forceDbccLoginfo || _sqlVersion < _minDmvLogInfoVersion)
             {
-                sql = LogFileVisualizerResources.DbccLoginfoLite;
-                parameters = null;
+                if (useLiteVersion)
+                {
+                    sql = LogFileVisualizerResources.DbccLoginfoLite;
+                }
+                else
+                {
+                    sql = LogFileVisualizerResources.DbccLoginfo;
+                    SqlParameter lsnParameter = new SqlParameter("lastKnownLsn", GetParameterValue(lastKnownLsn?.ToString(LsnStringType.DecimalSeparated)));
+                    parameters = new SqlParameter[1] { lsnParameter };
+                }
             }
             else
             {
-                sql = LogFileVisualizerResources.DbccLoginfo;
-                SqlParameter lsnParameter = new SqlParameter("lastKnownLsn", GetParameterValue(lastKnownLsn?.ToString(LsnStringType.DecimalSeparated)));
-                parameters = new SqlParameter[1] { lsnParameter };
+                // Version >= 2016 SP2 and forceDbccLoginfo is false
+                sql = @"set deadlock_priority low;
+
+select cast(file_id as int) FileId,
+       cast(vlf_size_mb * 1024 * 1024 as bigint) FileSize,
+       vlf_begin_offset StartOffset,
+       cast(vlf_sequence_number as int) FSeqNo,
+       vlf_active Active,
+       vlf_status Status,
+       cast(vlf_parity as tinyint) Parity,
+       vlf_create_lsn CreateLSN,
+	   @@SERVERNAME ServerName,
+	   db_name() DatabaseName,
+	   sysdatetime() CaptureTime,
+	   cast(null as nvarchar(50)) CurrentLsnHex
+from sys.dm_db_log_info(null);";
             }
 
             using (DataTable table = ExecuteSqlOneResultset(sql, parameters))
@@ -67,7 +93,19 @@ namespace LogFileVisualizerLib
                     item.VirtualLogFileNumber = GetObjectValue<int>(row, "FSeqNo");
                     item.Status = GetObjectValue<int>(row, "Status");
                     item.Parity = GetObjectValue<byte>(row, "Parity");
-                    item.CreateLsn = GetObjectValue<decimal>(row, "CreateLSN");
+
+                    object createLsnObject = row["CreateLSN"];
+                    Type createLsnType = createLsnObject.GetType();
+                    if (createLsnType == typeof(decimal))
+                    {
+                        item.CreateLsn = GetObjectValue<decimal>(createLsnObject);
+                    }
+                    else if (createLsnType == typeof(string))
+                    {
+                        string createLsnTypeHexSeparated = GetObjectValue<string>(createLsnObject);
+                        LogSequenceNumber createLsn = new LogSequenceNumber(createLsnTypeHexSeparated, LsnStringType.HexidecimalSeparated);
+                        item.CreateLsn = createLsn.ToDecimal();
+                    }
 
                     string recoveryUnitIdColumnName = "RecoveryUnitId";
                     if (table.Columns.Contains(recoveryUnitIdColumnName))
@@ -106,6 +144,20 @@ namespace LogFileVisualizerLib
                 dbInfo.LogReuseWaitDescription = table.Rows[0]["log_reuse_wait_desc"] as string;
 
                 return dbInfo;
+            }
+        }
+
+        private void GetVersion()
+        {
+            string sql = @"select serverproperty('ProductVersion') Version;";
+
+            object versionObject = ExecuteSqlScalar(sql);
+            string versionString = versionObject as string;
+
+            Version version;
+            if (Version.TryParse(versionString, out version))
+            {
+                _sqlVersion = version;
             }
         }
     }
